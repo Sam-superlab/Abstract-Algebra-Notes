@@ -1,0 +1,1139 @@
+\documentclass[11pt]{article}
+
+% ---------- Page Layout ----------
+\usepackage[
+  paper=a4paper,
+  left=0.8in,
+  right=2.2in, % space for notes
+  top=0.8in,
+  bottom=0.8in
+]{geometry}
+
+% ---------- Math Packages ----------
+\usepackage{amsmath, amssymb, amsthm, mathrsfs}
+
+% ---------- Colors ----------
+\usepackage{xcolor}
+\usepackage{pagecolor}
+
+\definecolor{paperCream}{RGB}{253,232,208}
+\pagecolor{paperCream}
+
+% ---------- Marginal Notes ----------
+\setlength{\marginparpush}{10pt}
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\tiny}
+\setlength{\marginparwidth}{1.7in}
+
+% ---------- Formatting ----------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% ---------- tcolorbox Theorem/Proof Boxes (title bar like screenshot) ----------
+\usepackage[most]{tcolorbox}
+
+% Theme colors (tune these as you like)
+\definecolor{thmBar}{RGB}{120,0,0}        % deep red title bar (like screenshot)
+\definecolor{thmBody}{RGB}{255,248,244}   % very light warm body
+\definecolor{thmFrame}{RGB}{120,0,0}      % frame matches title bar
+
+\definecolor{prfBar}{RGB}{30,80,140}      % proof title bar (blue)
+\definecolor{prfBody}{RGB}{248,249,251}   % proof body background
+\definecolor{prfFrame}{RGB}{30,80,140}
+
+% Base style for "bar-header" boxes
+\tcbset{
+  barbox/.style={
+    enhanced,
+    breakable,
+    sharp corners,
+    boxrule=0.8pt,
+    left=8pt,right=8pt,top=6pt,bottom=6pt,
+    before skip=10pt,
+    after skip=10pt,
+    coltitle=white,
+    fonttitle=\bfseries,
+    attach boxed title to top left={yshift=-1.6mm, xshift=3mm},
+    boxed title style={
+      sharp corners,
+      boxrule=0pt,
+      top=2pt,bottom=2pt,left=7pt,right=7pt
+    },
+  }
+}
+
+% Theorem-like environments (numbered within section)
+\newtcbtheorem[number within=section]{theorem}{Theorem}{
+  barbox,
+  colback=thmBody,
+  colframe=thmFrame,
+  colbacktitle=thmBar,
+  boxed title style={colback=thmBar}
+}{thm}
+
+\newtcbtheorem[use counter from=theorem]{lemma}{Lemma}{
+  barbox,
+  colback=thmBody,
+  colframe=thmFrame,
+  colbacktitle=thmBar,
+  boxed title style={colback=thmBar}
+}{lem}
+
+\newtcbtheorem[use counter from=theorem]{proposition}{Proposition}{
+  barbox,
+  colback=thmBody,
+  colframe=thmFrame,
+  colbacktitle=thmBar,
+  boxed title style={colback=thmBar}
+}{prop}
+
+\newtcbtheorem[use counter from=theorem]{corollary}{Corollary}{
+  barbox,
+  colback=thmBody,
+  colframe=thmFrame,
+  colbacktitle=thmBar,
+  boxed title style={colback=thmBar}
+}{cor}
+
+% Proof box: wrap the amsthm proof environment (syntax unchanged)
+\newtcolorbox{proofbox}{
+  barbox,
+  colback=prfBody,
+  colframe=prfFrame,
+  colbacktitle=prfBar,
+  boxed title style={colback=prfBar},
+  title=Proof
+}
+
+\let\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}{
+  \begin{proofbox}\begin{oldproof}
+}{
+  \end{oldproof}\end{proofbox}
+}
+
+% ---------- Custom Note Command ----------
+\renewcommand{\thmnote}[1]{\marginnote{\emph{#1}}}
+\newcommand{\proofnote}[1]{\marginnote{\footnotesize\emph{#1}}}
+\newcommand{\reason}[1]{\quad \text{(#1)}}
+
+% ---------- Separators ----------
+\newcommand{\sep}{%
+  \vspace{0.6em}
+  \noindent\rule{\linewidth}{0.4pt}
+  \vspace{0.6em}
+}
+
+% ---------- Common Number Sets ----------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\G}{\mathscr{G}}
+
+% ---------- Document ----------
+\begin{document}
+
+
+
+\begin{center}
+    {\Large \textbf{Theorem List w/ Proof}}\\
+    \vspace{0.3em}
+    {\small Abstract Algebra \quad • \quad Spring 2026 \quad • \quad Xuyi Ren}
+\end{center}
+
+% ==================================================
+
+\begin{theorem*}
+\textbf{3.13} Let $(S,\ast)$ be a binary algebraic structure.  
+Then $(S,\ast)$ has at most one identity element.
+\end{theorem*}
+
+\begin{proof}
+We proceed by contradiction.  
+Assume that $e$ and $f$ are two distinct identity elements in $(S,\ast)$.
+
+Since $e$ is an identity, we have
+\[
+e \ast x = x \quad \text{and} \quad x \ast e = x
+\quad \text{for all } x \in S.
+\]
+In particular, taking $x=f$, we obtain
+\[
+e \ast f = f.
+\]
+
+Similarly, since $f$ is an identity, we have
+\[
+f \ast x = x \quad \text{and} \quad x \ast f = x
+\quad \text{for all } x \in S.
+\]
+In particular, taking $x=e$, we obtain
+\[
+f \ast e = e.
+\]
+
+\proofnote{Use the defining property of an identity element, applied to the other candidate}
+
+Now observe that
+\[
+e = f \ast e = f
+\]
+and hence $e=f$, which contradicts the assumption that $e$ and $f$ are distinct.
+
+Therefore, $(S,\ast)$ has at most one identity element.
+\end{proof}
+
+
+\sep
+
+\begin{theorem*}
+\textbf{3.14} Let $(S,\ast)$ and $(S',\ast)$ be binary algebraic structures.
+Let $\phi : S \to S'$ be an isomorphism.
+Let $e \in S$ be an identity, and let $e' = \phi(e)$.
+Then $e'$ is an identity element in $S'$.
+\end{theorem*}
+
+\begin{proof}
+Let $y \in S'$ be arbitrary.
+\proofnote{\textbf{Goal}: to prove $e'$ is an identity, we must show \textbf{$e' \ast y = y$ and $y \ast e' = y$ for arbitrary $y \in S'$}}
+
+Since $\phi$ is surjective, there exists $x \in S$ such that
+\[
+\phi(x) = y.
+\]
+\proofnote{\textbf{Surjectivity} lets us \textbf{pull elements back} from $S'$ to $S$, where we know $e$ behaves as an identity}
+
+Since $e$ is an identity element in $S$, we have
+\[
+e \ast x = x \quad \text{and} \quad x \ast e = x.
+\]
+\proofnote{\textbf{Identity in $S$}: this is where we actually use the hypothesis that $e$ is an identity}
+
+Applying $\phi$ to both equations gives
+\[
+\phi(e \ast x) = \phi(x)
+\quad \text{and} \quad
+\phi(x \ast e) = \phi(x).
+\]
+
+Since $\phi$ is an isomorphism, it satisfies the homomorphism property:
+\[
+\phi(e \ast x) = \phi(e) \ast \phi(x)
+\quad \text{and} \quad
+\phi(x \ast e) = \phi(x) \ast \phi(e).
+\]
+\proofnote{\textbf{Homomorphism property}: structure is preserved under $\phi$}
+
+Substituting, we obtain
+\[
+\phi(e) \ast \phi(x) = \phi(x)
+\quad \text{and} \quad
+\phi(x) \ast \phi(e) = \phi(x).
+\]
+
+Recalling that $\phi(e) = e'$ and $\phi(x) = y$, this becomes
+\[
+e' \ast y = y
+\quad \text{and} \quad
+y \ast e' = y.
+\]
+
+Since $y \in S'$ was arbitrary, $e'$ is an identity element in $S'$.
+\proofnote{\textbf{Arbitrary element argument}: this completes the ``for all $y \in S'$'' requirement}
+\end{proof}
+
+
+
+
+\section*{Group theory}
+
+
+
+
+\sep
+
+\begin{theorem*}
+\textbf{4.15 (Cancellation Law)} Let $(G,\ast)$ be a group, and let $a,b,c \in G$.
+\begin{itemize}
+    \item (Left cancellation) If $a \ast b = a \ast c$, then $b = c$.
+    \item (Right cancellation) If $b \ast a = c \ast a$, then $b = c$.
+\end{itemize}
+\end{theorem*}
+
+\begin{proof}
+We prove the left cancellation law; the right cancellation law follows by a symmetric argument.
+
+Assume that
+\[
+a \ast b = a \ast c.
+\]
+\proofnote{\textbf{Goal}: remove $a$ from the left without ``dividing''. \textbf{Key tool}: use $a^{-1}$ (\textbf{existence of inverses} is why cancellation holds in groups).}
+
+
+Since $G$ is a group, $a$ has an inverse, denoted $a^{-1}$.
+% \proofnote{Existence of inverses is essential; this is why cancellation holds in groups}
+
+Multiply both sides on the left by $a^{-1}$ to obtain
+\[
+a^{-1} \ast (a \ast b) = a^{-1} \ast (a \ast c).
+\]
+\proofnote{\textbf{Left multiplication} replaces informal ``division''}
+
+By associativity, we may rewrite both sides as
+\[
+(a^{-1} \ast a) \ast b = (a^{-1} \ast a) \ast c.
+\]
+\proofnote{\textbf{Associativity} justifies re-parenthesizing; this step is not automatic}
+
+By definition of inverse, $a^{-1} \ast a = e$, where $e$ is the identity element of $G$.
+Thus,
+\[
+e \ast b = e \ast c.
+\]
+
+By definition of identity, $e \ast b = b$ and $e \ast c = c$. Therefore,
+\[
+b = c,
+\]
+which completes the proof of left cancellation.
+\end{proof}
+
+
+\sep
+
+\begin{theorem*}
+\textbf{4.16} Let $(G,\ast)$ be a group, and let $a,b \in G$.
+Then there exist unique elements $x,y \in G$ such that
+\[
+a \ast x = b
+\quad \text{and} \quad
+y \ast a = b.
+\]
+\end{theorem*}
+
+\begin{proof}
+We prove the statement for the equation $a \ast x = b$.
+The proof for $y \ast a = b$ is analogous.
+
+\proofnote{\textbf{Two tasks}: prove \textbf{existence} of a solution and then \textbf{uniqueness}}
+
+\textbf{Existence.}
+Since $G$ is a group, $a$ has an inverse $a^{-1}$.
+Define
+\[
+x := a^{-1} \ast b.
+\]
+\proofnote{\textbf{Key idea}: ``solve'' by \textbf{multiplying on the left by the inverse}; no commutativity assumed}
+
+Then
+\[
+\begin{aligned}
+a \ast x
+&= a \ast (a^{-1} \ast b) \\
+&= (a \ast a^{-1}) \ast b \reason{associativity} \\
+&= e \ast b \reason{definition of inverse} \\
+&= b \reason{definition of identity}.
+\end{aligned}
+\]
+
+Thus, a solution exists.
+
+\medskip
+
+\textbf{Uniqueness.}
+Suppose $x'$ is another element of $G$ such that
+\[
+a \ast x' = b.
+\]
+Then
+\[
+a \ast x = b = a \ast x'.
+\]
+By the left cancellation law (Theorem 4.15), we conclude
+\[
+x = x'.
+\]
+\proofnote{\textbf{Cancellation} turns equality of products into equality of elements}
+
+Therefore, the solution to $a \ast x = b$ is unique.
+\end{proof}
+\sep
+
+\begin{lemma}
+\textbf{3.A} Let $(S,\ast)$, $(S',\ast')$, and $(S'',\ast'')$ be binary algebraic structures.
+\begin{enumerate}
+    \item If $\phi : S \to S'$ is an isomorphism, then $\phi^{-1} : S' \to S$ is an isomorphism.
+    \item If $\phi : S \to S'$ and $\psi : S' \to S''$ are isomorphisms, then
+    $\psi \circ \phi : S \to S''$ is an isomorphism.
+\end{enumerate}
+\proofnote{\textbf{Key idea}: isomorphisms are closed under taking \textbf{inverses} and \textbf{composition}}
+\end{lemma}
+
+\begin{proof}
+\textbf{(1)} Assume $\phi : S \to S'$ is an isomorphism.
+Then $\phi$ is bijective, so $\phi^{-1} : S' \to S$ exists and is also bijective.
+
+It remains to show that $\phi^{-1}$ preserves the operation.
+Let $y_1,y_2 \in S'$ be arbitrary. Since $\phi$ is surjective, there exist $x_1,x_2 \in S$
+such that $\phi(x_1)=y_1$ and $\phi(x_2)=y_2$.
+Since $\phi$ is a homomorphism, we have
+\[
+\phi(x_1 \ast x_2)=\phi(x_1)\ast'\phi(x_2)=y_1\ast' y_2.
+\]
+Applying $\phi^{-1}$ to both sides yields
+\[
+x_1 \ast x_2=\phi^{-1}(y_1\ast' y_2).
+\]
+But $x_1=\phi^{-1}(y_1)$ and $x_2=\phi^{-1}(y_2)$, hence
+\[
+\phi^{-1}(y_1\ast' y_2)=\phi^{-1}(y_1)\ast \phi^{-1}(y_2).
+\]
+Therefore, $\phi^{-1}$ is a homomorphism, and since it is bijective, it is an isomorphism.
+
+\medskip
+\textbf{(2)} Assume $\phi : S \to S'$ and $\psi : S' \to S''$ are isomorphisms.
+Then $\phi$ and $\psi$ are bijections, hence $\psi\circ\phi$ is a bijection.
+
+It remains to show that $\psi\circ\phi$ preserves the operation.
+Let $a,b \in S$ be arbitrary. Using the homomorphism property of $\phi$ and $\psi$, we get
+\[
+(\psi\circ\phi)(a\ast b)
+= \psi(\phi(a\ast b))
+= \psi(\phi(a)\ast'\phi(b))
+= \psi(\phi(a))\ast''\psi(\phi(b))
+ = (\psi\circ\phi)(a)\ast''(\psi\circ\phi)(b).
+\]
+Thus $\psi\circ\phi$ is a homomorphism. Since it is bijective, it is an isomorphism.
+\end{proof}
+
+
+
+
+\sep
+
+\begin{theorem*}
+\textbf{4.17} Let $(G,\ast)$ be a group.
+Then there exists a unique element $e \in G$ such that
+\[
+e \ast x = x \ast e = x
+\quad \text{for all } x \in G.
+\]
+Moreover, for each $a \in G$, there exists a unique element $a' \in G$ such that
+\[
+a' \ast a = a \ast a' = e.
+\]
+In particular, the identity element and the inverse of each element are unique in a group.
+\end{theorem*}
+
+\begin{proof}
+    The first statement is by $\G 2$ we just need to show uniqueness by Theorem 3.13
+    \\
+    The second statement existence by $\G 3$, we just need to show uniquesness:
+    Suppose we have $a',a''\in G$ s.t. 
+    \begin{align}
+        a*a'=&e=a'*a\\
+        a*a''=&e=a''*a
+    \end{align}
+    Then we have $a''*a=a'*a$ by cancellation law, we have $a''=a'$
+\end{proof}
+
+\sep
+
+\begin{corollary}
+\textbf{4.18} Let $(G,\ast)$ be a group, and let $a,b \in G$. Then
+\[
+(a\ast b)'=b'\ast a'.
+\]
+\end{corollary}
+
+\begin{proof}
+We show that $b'\ast a'$ is an inverse of $a\ast b$. By uniqueness of inverses (Theorem~4.17), this will imply
+\((a\ast b)'=b'\ast a'\).
+
+First, compute one direction:
+\[
+\begin{aligned}
+(b'\ast a')\ast (a\ast b)
+&= \bigl((b'\ast a')\ast a\bigr)\ast b
+\quad \text{(associativity)}\\
+&= \bigl(b'\ast (a'\ast a)\bigr)\ast b
+\quad \text{(associativity)}\\
+&= (b'\ast e)\ast b
+\quad \text{(inverse property)}\\
+&= b'\ast b
+\quad \text{(identity)}\\
+&= e.
+\quad \text{(inverse property)}
+\end{aligned}
+\]
+
+Similarly, for the other direction:
+\[
+\begin{aligned}
+(a\ast b)\ast (b'\ast a')
+&= a\ast \bigl(b\ast (b'\ast a')\bigr)
+\quad \text{(associativity)}\\
+&= a\ast \bigl((b\ast b')\ast a'\bigr)
+\quad \text{(associativity)}\\
+&= a\ast (e\ast a')
+\quad \text{(inverse property)}\\
+&= a\ast a'
+\quad \text{(identity)}\\
+&= e.
+\quad \text{(inverse property)}
+\end{aligned}
+\]
+
+Thus $b'\ast a'$ is a two-sided inverse of $a\ast b$, so by Theorem~4.17 it must equal $(a\ast b)'$.
+\end{proof}
+
+
+\sep
+
+
+
+\begin{theorem*}
+\textbf{5.14 (Subgroup Criterion)} Let $(G,\ast)$ be a group, and let $H \subseteq G$.
+Then $H$ is a subgroup of $G$ if and only if the following three conditions all hold:\proofnote{
+\textbf{Key idea}: associativity is \textbf{inherited} from $G$ and never needs to be re-verified.\\
+\textbf{Practical use}: this criterion replaces checking all group axioms directly.
+}
+\begin{enumerate}
+    \item $H$ is \textbf{closed} under the binary operation of $G$;
+    \item the \textbf{identity element} $e$ of $G$ is contained in $H$;
+    \item for every $a \in H$, the \textbf{inverse} $a^{-1}$ is also in $H$.
+\end{enumerate}
+
+
+\end{theorem*}
+
+
+
+
+\sep
+
+\begin{lemma}
+\textbf{5B (One-Step Subgroup Test)} Let $(G,\ast)$ be a group, and let $H$ be a nonempty subset of $G$.
+Then $H \le G$ if and only if for all $x,y \in H$, we have
+\[
+x \ast y^{-1} \in H.
+\]
+\proofnote{\textbf{One-step test}: instead of three conditions, check closure under $x y^{-1}$}
+\end{lemma}
+
+\begin{proof}
+We prove both directions.
+
+\medskip
+\textbf{($\Rightarrow$)}
+Assume that $H$ is a subgroup of $G$.
+Let $x,y \in H$ be arbitrary.
+Since $H$ is a subgroup, $y^{-1} \in H$ by Theorem~5.14, and since $H$ is closed under the group operation,
+\[
+x \ast y^{-1} \in H.
+\]
+\proofnote{\textbf{Easy direction}: closure and inverses are already known for subgroups}
+
+\medskip
+\textbf{($\Leftarrow$)}
+Now assume that $H$ is nonempty and that for all $x,y \in H$,
+\[
+x \ast y^{-1} \in H.
+\]
+We will verify the three conditions of Theorem~5.14.
+
+\proofnote{\textbf{Strategy}: prove the subgroup axioms \textbf{out of order}—identity, inverses, then closure}
+
+\medskip
+\textbf{Identity.}
+Since $H$ is nonempty, choose some element $x \in H$.
+Let $y = x$. Then
+\[
+x \ast x^{-1} = e \in H,
+\]
+so the identity element $e$ of $G$ lies in $H$.
+\proofnote{\textbf{Nonemptiness} is essential here; otherwise $x$ cannot be chosen}
+
+\medskip
+\textbf{Inverses.}
+Let $y \in H$ be arbitrary.
+Since $e \in H$ from the previous step, applying the hypothesis with $x=e$ gives
+\[
+e \ast y^{-1} = y^{-1} \in H.
+\]
+
+\medskip
+\textbf{Closure.}
+Let $x,y \in H$.
+From the previous step, $y^{-1} \in H$, and applying the hypothesis to $x$ and $y^{-1}$ gives
+\[
+x \ast (y^{-1})^{-1} \in H.
+\]
+Since $(y^{-1})^{-1} = y$, we conclude
+\[
+x \ast y \in H.
+\]
+
+Thus $H$ contains the identity, is closed under inverses, and is closed under the group operation.
+By Theorem~5.14, $H$ is a subgroup of $G$.
+\end{proof}
+
+
+% =======================
+% (Paste into your doc)
+% =======================
+
+\sep
+
+\begin{theorem*}
+\textbf{5.17} Let $G$ be a group and let $a \in G$. Then
+\[
+H=\{a^n \mid n \in \Z\}
+\]
+is a subgroup of $G$ and is the smallest subgroup of $G$ that contains $a$; that is,
+every subgroup containing $a$ contains $H$.
+\end{theorem*}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{lemma}
+\textbf{6.A (Division Algorithm)} If $m \in \Z^{+}$ and $n \in \Z$, then there exist unique integers $q,r$ such that
+\[
+n=mq+r \quad \text{and} \quad 0 \le r < m.
+\]
+\end{lemma}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{6.1} Every cyclic group is abelian.
+\end{theorem*}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{6.6} A subgroup of a cyclic group is cyclic.
+\end{theorem*}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{corollary}
+\textbf{6.7} The subgroups of $(\Z,+)$ are precisely the groups $(n\Z,+)$ for $n \in \N$.
+\end{corollary}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{6.10} Let $G$ be a cyclic group with generator $a$.
+If the order of $G$ is infinite, then $G$ is isomorphic to $(\Z,+)$.
+If $G$ has finite order $n$, then $G$ is isomorphic to $(\Z_n,+_n)$.
+\end{theorem*}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{lemma}
+\textbf{6.B} Given $r,s,t \in \Z$, if $\gcd(r,s)=1$ and $r$ divides $st$, then $r$ divides $t$.
+\end{lemma}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{lemma}
+\textbf{6.C} For $n,s \in \Z^{+}$, if $g=\gcd(n,s)$, then $\gcd(n/g,s/g)=1$.
+\end{lemma}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{lemma}
+\textbf{6.D} If $G$ is a finite cyclic group with generator $x$, then the order of $G$ is the smallest
+$m \in \Z^{+}$ such that $x^{m}=e$.
+For $n \in \Z$, we have $x^{n}=e$ if and only if the order of $G$ divides $n$.
+\end{lemma}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{7.4} The intersection of a family of subgroups $H_i$ of a group $G$ (for $i \in I$) is again a subgroup of $G$.
+\end{theorem*}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{lemma}
+\textbf{8.A} Let $\phi : G \to G'$ be a homomorphism.
+Let $e \in G$ and $e' \in G'$ be the identity elements. Then:
+\begin{enumerate}
+    \item $\phi(e)=e'$;
+    \item for any $x \in G$, $\phi(x^{-1})=\phi(x)^{-1}$;
+    \item if $H \le G$, then $\phi[H] \le G'$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{lemma}
+\textbf{8.15} Let $G$ and $G'$ be groups and let $\phi : G \to G'$ be a one-to-one function such that
+\[
+\phi(xy)=\phi(x)\phi(y) \quad \text{for all } x,y \in G.
+\]
+Then $\phi[G]$ is a subgroup of $G'$ and $\phi$ provides an isomorphism of $G$ with $\phi[G]$.
+\end{lemma}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{lemma}
+\textbf{8.B} Let $G$ be a group and $x,y \in G$. Then $\lambda_x \circ \lambda_y=\lambda_{xy}$, and $\lambda_e$ is the identity in $S_G$.
+\end{lemma}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{lemma}
+\textbf{8.C} Let $G$ be a group and $x \in G$. Then the function $\lambda_x : G \to G$ defined by
+\[
+\lambda_x(y)=xy
+\]
+is in $S_G$.
+\end{lemma}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{8.16 (Cayley’s Theorem)} Every group is isomorphic to a group of permutations.
+\end{theorem*}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{9.8} Every permutation $\sigma$ of a finite set is a product of disjoint cycles.
+\end{theorem*}
+\begin{proof}
+Sorry
+\end{proof}
+
+\sep
+
+\begin{corollary}
+\textbf{9.12} Any permutation of a finite set of at least two elements is a product of transpositions.
+\end{corollary}
+\begin{proof}
+Sorry
+\end{proof}
+
+
+% =======================
+% Continuation (29–41)
+% Theorem/Lemma statements with empty proofs
+% =======================
+
+\sep
+
+\begin{lemma}
+\textbf{9.A} Let $n \in \Z^{+}$, and let $\sigma,\tau \in S_n$ where $\tau$ is a transposition.
+Let $\ell$ and $\ell'$ be the number of orbits in $\sigma$ and $\tau\sigma$, respectively.
+Then $\ell'$ and $\ell$ differ by $1$.
+In particular,
+\[
+\ell' \equiv \ell + 1 \pmod{2}.
+\]
+\end{lemma}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{9.15} Let $n \ge 2$.
+Any permutation $\sigma \in S_n$ can be expressed either as a product of an even number of transpositions
+or as a product of an odd number of transpositions, but not both.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{9.20} If $n \ge 2$, then the collection of all even permutations of $\{1,2,\dots,n\}$
+forms a subgroup of order $n!/2$ of the symmetric group $S_n$.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{10.1} Let $H$ be a subgroup of $G$.
+Define relations $\sim_L$ and $\sim_R$ on $G$ by
+\[
+a \sim_L b \iff a^{-1}b \in H
+\quad \text{and} \quad
+a \sim_R b \iff ab^{-1} \in H.
+\]
+Then $\sim_L$ and $\sim_R$ are equivalence relations on $G$.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{lemma}
+\textbf{10.A} For the equivalence relation $\sim_L$, the equivalence class of an element $g \in G$ is
+\[
+gH := \{gh \mid h \in H\}.
+\]
+For $\sim_R$, the equivalence class of $g$ is
+\[
+Hg := \{hg \mid h \in H\}.
+\]
+\end{lemma}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{lemma}
+\textbf{10.B} Let $H$ be a subgroup of a group $G$, and let $x,y \in G$.
+Then $x \in yH$ if and only if $y \in xH$.
+\end{lemma}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{10.10 (Lagrange)} Let $H$ be a subgroup of a finite group $G$.
+Then
+\[
+|H| \mid |G|.
+\]
+In particular,
+\[
+|H|\,(G:H)=|G|.
+\]
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{corollary}
+\textbf{10.11} Every group of prime order is cyclic.
+\end{corollary}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{10.12} The order of an element of a finite group divides the order of the group.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{11.2} Let $G_1,G_2,\dots,G_n$ be groups.
+For $(a_1,a_2,\dots,a_n)$ and $(b_1,b_2,\dots,b_n)$ in $\prod_{i=1}^n G_i$, define
+\[
+(a_1,a_2,\dots,a_n)(b_1,b_2,\dots,b_n)
+=
+(a_1b_1,a_2b_2,\dots,a_nb_n).
+\]
+Then $\prod_{i=1}^n G_i$ is a group under this binary operation.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{11.5} The group $\Z_m \times \Z_n$ is cyclic and isomorphic to $\Z_{mn}$
+if and only if $m$ and $n$ are relatively prime (that is, $\gcd(m,n)=1$).
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{corollary}
+\textbf{11.6} The group $\prod_{i=1}^n \Z_{m_i}$ is cyclic and isomorphic to $\Z_{m_1m_2\cdots m_n}$
+if and only if $\gcd(m_i,m_j)=1$ for all $i \ne j$.
+\end{corollary}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{11.9} Let $(a_1,a_2,\dots,a_n) \in \prod_{i=1}^n G_i$.
+If $a_i$ has finite order $r_i$ in $G_i$, then the order of $(a_1,a_2,\dots,a_n)$
+in $\prod_{i=1}^n G_i$ is $\mathrm{lcm}(r_1,r_2,\dots,r_n)$.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+% =======================
+% Continuation (42–57)
+% Statements with empty proofs
+% =======================
+
+\sep
+
+\begin{theorem*}
+\textbf{11.12 (Fundamental Theorem of Finitely Generated Abelian Groups)} Every finitely generated abelian group $G$ is isomorphic to a direct product of cyclic groups of the form
+\[
+\Z_{p_1^{r_1}} \times \Z_{p_2^{r_2}} \times \cdots \times \Z_{p_k^{r_k}} \times \Z \times \Z \times \cdots \times \Z,
+\]
+where the $p_i$ are primes (not necessarily distinct) and the $r_i$ are positive integers.
+The direct product is unique up to possible rearrangement of the factors; that is,
+the number of $\Z$ factors is unique and the prime powers $\langle p_i^{r_i}\rangle$ are unique.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{13.12} Let $\phi$ be a homomorphism of a group $G$ into a group $G'$. Then:
+\begin{enumerate}
+    \item If $e$ is the identity element in $G$, then $\phi(e)$ is the identity element in $G'$.
+    \item If $a \in G$, then $\phi(a^{-1})=\phi(a)^{-1}$.
+    \item If $H$ is a subgroup of $G$, then $\phi[H]$ is a subgroup of $G'$.
+    \item If $K'$ is a subgroup of $G'$, then $\phi^{-1}[K']$ is a subgroup of $G$.
+\end{enumerate}
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{13.15} Let $\phi : G \to G'$ be a group homomorphism, and let $H=\ker(\phi)$.
+Let $a \in G$. Then the set
+\[
+\phi^{-1}(\{\phi(a)\})=\{x \in G \mid \phi(x)=\phi(a)\}
+\]
+is the left coset $aH$, and is also the right coset $Ha$ of $H$.
+Consequently, the two partitions of $G$ into left cosets and right cosets are the same.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{corollary}
+\textbf{13.18} A group homomorphism $\phi : G \to G'$ is a one-to-one map if and only if $\ker(\phi)=\{e\}$.
+\end{corollary}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{corollary}
+\textbf{13.20} If $\phi : G \to G'$ is a group homomorphism, then $\ker(\phi)$ is a normal subgroup of $G$.
+\end{corollary}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{14.4} If $H$ is a normal subgroup of a group $G$, then left coset multiplication, given by
+\[
+(aH)(bH)=(ab)H,
+\]
+is a well-defined binary operation on $G/H$.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{corollary}
+\textbf{14.5} If $H$ is a normal subgroup of a group $G$, then $G/H$, with the operation given in Theorem~14.4, is a group.
+\end{corollary}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{14.9} Let $H$ be a normal subgroup of $G$. Then $\gamma : G \to G/H$ defined by
+\[
+\gamma(g)=gH
+\]
+is a homomorphism.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{14.11 (The Fundamental Homomorphism Theorem)} Let $\phi : G \to G'$ be a group homomorphism with kernel $H$.
+Then $\phi[G]$ is isomorphic to $G/H$.
+In particular, if $G'=G/H$ and $\phi(g)=gH$, then $\phi[G]=G/H$.
+If $\gamma : G \to G/H$ is the homomorphism given by $\gamma(g)=gH$, then
+\[
+\phi(g)=\gamma(g)
+\quad \text{for all } g \in G.
+\]
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{14.13} The following are three equivalent conditions for a subgroup $H$ of a group $G$ to be a normal subgroup of $G$:
+\begin{enumerate}
+    \item $ghg^{-1} \in H$ for all $g \in G$ and $h \in H$;
+    \item $gHg^{-1}=H$ for all $g \in G$;
+    \item $gH=Hg$ for all $g \in G$.
+\end{enumerate}
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{lemma}
+\textbf{14.A} If a finite group $G$ has exactly one subgroup $H$ of a given order, then $H$ is a normal subgroup of $G$.
+\end{lemma}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{16.3} Let $X$ be a $G$-set.
+For each $g \in G$, the function $\sigma_g : X \to X$ defined by $\sigma_g(x)=gx$ for $x \in X$
+is a permutation of $X$.
+Also, the map $\phi : G \to S_X$ defined by $\phi(g)=\sigma_g$ is a homomorphism with the property
+that $\phi(g)(x)=gx$.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{16.12} Let $X$ be a $G$-set.
+Then $G_x$ is a subgroup of $G$ for each $x \in X$.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{16.14} Let $X$ be a $G$-set.
+For $x_1,x_2 \in X$, let $x_1 \sim x_2$ if and only if there exists $g \in G$ such that $gx_1=x_2$.
+Then $\sim$ is an equivalence relation on $X$.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{16.16} Let $G$ be a finite group, and let $X$ be a $G$-set.
+Then
+\[
+|X| = (G : G_x).
+\]
+Also, $|G_x|$ is a divisor of $|G|$.
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\sep
+
+\begin{theorem*}
+\textbf{36.1} Let $p$ be a prime number.
+If $G$ is a group with order $p^n$ and $X$ is a finite $G$-set, then
+\[
+|X| \equiv |X_G| \pmod{p}.
+\]
+\end{theorem*}
+\begin{proof}
+% TODO
+\end{proof}
+
+\section*{Ring Theory}
+
+
+\end{document}

@@ -1,0 +1,176 @@
+\documentclass[10pt]{article}
+
+% ---------- Page Layout ----------
+\usepackage[margin=0.7in]{geometry}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+\usepackage{pagecolor}
+
+\setlength{\columnsep}{0.4in}
+\pagecolor{lightgray}
+% ---------- Math Packages ----------
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+
+% ---------- Formatting ----------
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1em, nosep}
+\setlist[enumerate]{leftmargin=1em, nosep}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+
+% ---------- Custom Environments ----------
+\newtheoremstyle{defstyle}
+  {4pt} % space above
+  {4pt} % space below
+  {}    % body font
+  {}    % indent
+  {\bfseries} % theorem head font
+  {.}   % punctuation
+  {0.5em} % space after head
+  {}
+
+  \tcolorboxenvironment{definition}{
+  enhanced,
+  breakable,
+  colback=white,              % inner (definition) background
+  colframe=gray!60,           % border color
+  colbacktitle=gray!20,       % title background
+  arc=3mm,                    % rounded corners
+  boxrule=0.8pt,              % border thickness
+  left=6pt,
+  right=6pt,
+  top=6pt,
+  bottom=6pt,
+  fonttitle=\bfseries,
+}
+
+
+\theoremstyle{defstyle}
+\newtheorem{definition}{Definition}
+
+% ---------- Shortcuts ----------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\G}{\mathscr{G}}
+
+% ---------- Document ----------
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{Definition Cheat Sheet}}\\
+    \vspace{0.2em}
+    {\small Abstract Algebra / First chapter \quad • \quad Xuyi Ren \quad • \quad \today }
+\end{center}
+
+\vspace{0.5em}
+
+\begin{multicols}{2}
+
+\section*{Basic Algebraic terms}
+
+\begin{definition}[\textbf{Binary Operation}]
+    A \textbf{Binary Operation *} on set $S$ is a function $*:S\times S\to S$, For each $(a,b)\in S\times S$ we denote $*((a,b))$ as $a*b$
+\end{definition}
+
+\begin{definition}[\textbf{Closure}]
+    Let $*$ be an binary operation on $S$, let $H\subseteq S$ be a subset of $S$. Then the subset $H$ is called \textbf{closed} under $*$ if for all $a,b\in H$ we have $a*b\in H$. 
+\end{definition}
+
+\begin{definition}[\textbf{Induced operation}]
+    In the same setup of closure, the binary operation on $H$ given by restricting $*$ to set $H$ is called induced operation of $*$ on $H$
+\end{definition}
+
+\begin{definition}[\textbf{commutative}]
+    An binary operation $*$ on set $S$ is called commutative iff for all $a,b\in S$ we have $a*b=b*a$
+\end{definition}
+
+\begin{definition}[\textbf{Associative}]
+    A Binary operation $*$ on set $S$ is called associative iff for all $a,b,c\in S$ we have $a*(b*c)=(a*b)*c$
+\end{definition}
+
+\begin{definition}[\textbf{Binary Algebraic Structure}]
+    A Binary Algebraic Structure $<S,*>$ is a set $S$ together with a binary operation $*$ on $S$.
+\end{definition}
+
+\begin{definition}[\textbf{Isomorphism}]
+    Let $<S,*>$ and $<S',*'>$ be two binary algebraic structure, an isomorphism $\phi$ is an bijection between $S$ and $S'$ such that 
+    \begin{equation*}
+        \phi(x*y)=\phi(x)*'\phi(y)
+    \end{equation*}
+    for all $x,y\in S$. If such a mapping exists, then $S$ and $S'$ are called \textbf{isomorphic binary structures}.
+\end{definition}
+
+\begin{definition}[\textbf{Structural property}]
+    A structural property of a binary structure is one that must be shared by any isomorphic structure.
+\end{definition}
+
+\begin{definition}[\textbf{Identity}]
+    Let $<S,*>$ be an binary algebraic structure, An element $e$ of $S$ is an identity element for $*$ if 
+    \begin{equation*}
+        a*e=e*a=a
+    \end{equation*}
+    for all $a\in S$.
+\end{definition}
+\section*{Group Theory}
+
+\begin{definition}[Group]
+A group $(G,*)$ is set that is closed under binary operation $*$  with associativity, identity, and inverses 
+\end{definition}
+
+\begin{definition}[\textbf{Abelian Group}]
+    A group $(G,\cdot)$ is abelian if $\cdot$ is commutative
+\end{definition}
+
+\begin{definition}[\textbf{General Linear Group of degree n}]
+    A General linear group of degree $n$ is a set of $n\times n$ invertible matrix with matrix multiplication defined on it.
+\end{definition}
+
+\begin{definition}[\textbf{Order of Group}]
+If $G$ is a group, then the \emph{order} $|G|$ of $G$ is the number of elements in $G$.
+(Recall from Section~0 that, for any set $S$, $|S|$ is the cardinality of $S$.)
+\end{definition}
+
+\begin{definition}[\textbf{Subgroup}]
+If a subset $H$ of a group $G$ is closed under the binary operation of $G$ and if $H$ with the
+induced operation from $G$ is itself a group, then $H$ is a \emph{subgroup} of $G$.
+We shall let $H \le G$ or $G \ge H$ denote that $H$ is a subgroup of $G$, and
+$H < G$ or $G > H$ shall mean $H \le G$ but $H \ne G$.
+\end{definition}
+
+
+\begin{definition}[\textbf{Improper, Proper and trivial subgroup}]
+If $G$ is a group, then the subgroup consisting of $G$ itself is the \emph{improper subgroup} of $G$.
+All other subgroups are \emph{proper subgroups}.
+The subgroup $\{e\}$ is the \emph{trivial subgroup} of $G$.
+All other subgroups are \emph{nontrivial}.
+\end{definition}
+
+\begin{definition}[\textbf{Cyclic subgroup of $G$ generate by $a$}]
+Let $G$ be a group and let $a \in G$. Then the subgroup
+$\{a^n \mid n \in \mathbb{Z}\}$ of $G$, characterized in Theorem~5.17,
+is called the \emph{cyclic subgroup} of $G$ generated by $a$, and denoted
+by $\langle a \rangle$.
+\end{definition}
+
+\begin{definition}[\textbf{Generator}]
+An element $a$ of a group $G$ \emph{generates} $G$ and is a \emph{generator}
+for $G$ if $\langle a \rangle = G$.
+A group $G$ is \emph{cyclic} if there is some element $a \in G$
+that generates $G$.
+\end{definition}
+
+\begin{definition}[\textbf{Cyclic Group}]
+A group $G$ is called \emph{cyclic} if there exists an element $a \in G$
+such that
+\[
+G = \langle a \rangle = \{ a^n \mid n \in \mathbb{Z} \}.
+\]
+\end{definition}
+
+\end{multicols}
+
+\end{document}

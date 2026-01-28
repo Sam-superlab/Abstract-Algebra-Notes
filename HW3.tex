@@ -1,0 +1,254 @@
+\documentclass[12pt,letterpaper, onecolumn]{exam}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+
+% Number equations by question (nice for homework)
+\numberwithin{equation}{question}
+
+% Theorem-like environments, numbered per question
+\newtheorem{theorem}{Theorem}[question]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% Make the QED symbol a solid square (optional)
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\newcommand{\Q}[0]{\mathbb{Q}}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\R}[0]{\mathbb{R}}
+\usepackage{amssymb}
+\usepackage[lmargin=71pt, tmargin=1.2in]{geometry}  %For centering solution box
+\lhead{ }
+\rhead{ }
+% \chead{\hline} % Un-comment to draw line below header
+\thispagestyle{empty}   %For removing header/footer from page 1
+
+\begin{document}
+
+\begingroup  
+    \centering
+    \LARGE Abstract Algebra\\
+    \LARGE Problem Set 1\\[0.5em]
+    \large \today\\[0.5em]
+    \large Xuyi (Sam) Ren\par
+    % \large Roll Number\par
+    \large MAT-321\par
+\endgroup
+\rule{\textwidth}{0.4pt}
+\pointsdroppedatright   %Self-explanatory
+\printanswers
+\renewcommand{\solutiontitle}{\noindent\textbf{Ans:}\enspace}   %Replace "Ans:" with starting keyword in solution box
+\begin{questions}
+
+\question[] 4.8 The set $\{1,3,5,7\}$ under $\cdot_8$ modulo 8 is a group. Give the table of the group
+
+\begin{solution}
+\paragraph{General Idea:}
+To construct the Cayley table for $G=\{1,3,5,7\}$ under multiplication modulo 8, we compute $a \cdot b \pmod 8$ for all pairs. We anticipate that 1 will be the identity element. Since multiplication of integers is commutative, we expect the table to be symmetric across the main diagonal. We will explicitly check that every row and column contains each element exactly once (the Latin Square property), which is characteristic of group tables.
+\end{solution}
+
+
+
+\question[] All $n\times n$ diagonal matrices with non-zero diagonal entries form a group under matrix multiplication.
+
+\paragraph{General Idea:}
+To prove this, we must first rigorously define the set of diagonal matrices $D^*$. A matrix $A$ is diagonal if $A_{ij} = 0$ whenever $i \neq j$. We will use the standard definition of matrix multiplication, $(AB)_{ij} = \sum_{k=1}^n A_{ik} B_{kj}$, to show that the product of two diagonal matrices is still diagonal (Closure). This summation definition also allows us to derive the specific values of the diagonal entries, which will simplify finding the Identity and Inverse elements.
+
+\begin{solution}
+    Let $D^*$ be the set of all $n \times n$ diagonal matrices with non-zero entries on the main diagonal. Formally, $A \in D^*$ if:
+    \begin{itemize}
+        \item $A_{ij} = 0$ for all $i \neq j$.
+        \item $A_{ii} \in \mathbb{R} \setminus \{0\}$ for all $1 \leq i \leq n$.
+    \end{itemize}
+
+    We first verify if matrix multiplication is binary operation under diagonal matrices(except for the zero matrix)
+
+
+    \paragraph{1. Closure}
+    Let $A, B \in D^*$. By the definition of matrix multiplication, the $(i,j)$-th entry of the product $C = AB$ is
+    \[ C_{ij} = \sum_{k=1}^n A_{ik} B_{kj} \]
+    
+    Since $A$ is diagonal, $A_{ik} = 0$ unless $k=i$. Thus, the summation over $k$ collapses to a single term where $k=i$:
+    \[ C_{ij} = A_{ii} B_{ij} \]
+    
+    Now consider the term $B_{ij}$. Since $B$ is diagonal, $B_{ij} = 0$ unless $j=i$.
+    \begin{itemize}
+        \item \textbf{Case 1 ($i \neq j$):} Since $j \neq i$, $B_{ij} = 0$. Therefore, $C_{ij} = A_{ii} \cdot 0 = 0$. This confirms $C$ is a diagonal matrix.
+        \item \textbf{Case 2 ($i = j$):} The entry is $C_{ii} = A_{ii} B_{ii}$. Since $A_{ii} \neq 0$ and $B_{ii} \neq 0$, their product $C_{ii} \neq 0$.
+    \end{itemize}
+    Thus, $AB \in D^*$, and the operation is closed.
+
+We verify the group axioms for $\langle D^*, \cdot \rangle$
+
+    \paragraph{2. Associativity}
+    Matrix multiplication is associative for all $n \times n$ matrices (a standard result of linear algebra). Since $D^* \subset M_{n \times n}(\mathbb{R})$, the operation inherits associativity.
+
+    \paragraph{3. Identity}
+    Consider the identity matrix $I_n$ where $(I_n)_{ij} = \delta_{ij}$ (the Kronecker delta).
+    For any $A \in D^*$, the $(i,j)$-th entry of $A I_n$ is:
+    \[ (A I_n)_{ij} = \sum_{k=1}^n A_{ik} \delta_{kj} \]
+    The term $\delta_{kj}$ is non-zero only when $k=j$. Thus the sum collapses to $A_{ij} \cdot 1 = A_{ij}$.
+    Similarly, $(I_n A)_{ij} = A_{ij}$.
+    Since $A_{ii} \neq 0$ implies the diagonal entries of $I_n$ (all 1s) are non-zero, $I_n \in D^*$. Thus, $I_n$ is the identity.
+
+    \paragraph{4. Inverse}
+    Let $A \in D^*$. We seek a matrix $B \in D^*$ such that $(AB)_{ij} = \delta_{ij}$.
+    Using our derived formula for the diagonal product from the Closure section, we know $(AB)_{ii} = A_{ii} B_{ii}$.
+    We require:
+    \[ A_{ii} B_{ii} = 1 \implies B_{ii} = \frac{1}{A_{ii}} \]
+    Since $A_{ii} \neq 0$, the value $1/A_{ii}$ is defined and non-zero. Let $B$ be the diagonal matrix with diagonal entries $B_{ii} = 1/A_{ii}$.
+    Then:
+    \[ (AB)_{ij} = \begin{cases} 0 & i \neq j \\ A_{ii}(1/A_{ii}) = 1 & i = j \end{cases} \]
+    This gives the identity matrix $I_n$. [cite_start]By \textbf{Theorem 4.17}[cite: 38], inverses in a group are unique, so $B = A^{-1}$.
+
+    Therefore, $D^*$ is a group.
+\end{solution}
+
+
+
+\question[] Let $S$ be the set of all real numbers except -1, deine $*$ on $S$ by 
+\begin{equation*}
+    a*b=a+b+ab
+\end{equation*}
+\begin{enumerate}
+    \item Show that * gives a binary operation on $S$
+    \item Show that $<S,*>$ is a group
+    \item Find the solution of the equation $2*x*3=7$ in $S$
+\end{enumerate}
+\begin{solution}
+\paragraph{General Idea:}
+The operation $a*b = a+b+ab$ can be factored as $(a+1)(b+1) - 1$. This insight reveals that the operation $*$ on the set $S = \mathbb{R} \setminus \{-1\}$ is isomorphic to standard multiplication on $\mathbb{R} \setminus \{0\}$ via the shift map $x \mapsto x+1$.
+\begin{itemize}
+    \item \textbf{Closure \& Inverse:} The condition $x \neq -1$ is equivalent to $x+1 \neq 0$. Since the product of non-zero numbers is non-zero, closure and inverses follow naturally from this shifted perspective.
+    \item \textbf{Equation Solving:} For the equation $2*x*3=7$, we rely on \textbf{Theorem 4.16} (uniqueness of solutions in a group) to guarantee a single valid $x$. We then expand the operation algebraically to isolate $x$.
+\end{itemize}
+
+
+First, we show that * gives a binary operation on S. \begin{proof}
+    Let $x,y\in S$ be arbitrary. Since $S = \mathbb{R} \setminus \{-1\}$, we know $x \neq -1$ and $y \neq -1$.
+    This implies $x+1 \neq 0$ and $y+1 \neq 0$.
+    Since the product of two non-zero real numbers is non-zero:
+    \begin{equation*}
+        (x+1)(y+1) \neq 0
+    \end{equation*}
+    Expanding this, we get $xy + x + y + 1 \neq 0$, which implies:
+    \begin{equation*}
+        x + y + xy \neq -1
+    \end{equation*}
+    Thus, that is exactly $x*y \neq -1$, therefore $x*y \in S$. The operation is closed.
+\end{proof}
+
+Now we show that $<S,*>$ is a group by showing associativity, identity, inverse
+
+Associativity:
+\begin{proof}
+    We wish to prove the associativity of $*$ on $S$
+
+    Let $x,y,z\in S$ be arbitrary. Consider the expression:
+    \begin{align*}
+        x*(y*z)&=x*(y+z+yz)\\
+        &= x+y+z+yz+x(y+z+yz) \\
+         &= x+y+z+yz+xy+xz+xyz
+    \end{align*}
+Now we consider another expression:
+\begin{align*}
+    (x*y)*z&=(x+y+xy)*z\\
+    &=x+y+z+xy+z(x+y+zy)\\
+    &=x+y+z+xy+xz+yz+xyz
+\end{align*}
+Comparing each term in both expression, we notice that they have the same expanded form, thus we have $x*(y*z)=(x*y)*z$ for all $x,y,z\in S$
+    
+\end{proof}
+
+
+Identity:
+\begin{proof}
+    We now prove there exists an identity element.
+    Let $x\in S$ be arbitrary, consider real number 0, we claim that 0 is the identity element of $<S,*>$.
+    We shall verify this by checking both $x*0$ and $0*x$:
+    \begin{align*}
+        x*0&=x+0+x\cdot0=x\\
+        0*x&=0+x+0\cdot x=x
+    \end{align*}
+    Thus, we have $x*0=0*x=x$ for arbitrary $x$, therefore 0 is indeed an identity element of $<S,*>$
+\end{proof}
+
+Inverse:\begin{proof}
+    Let $x \in S$ be arbitrary. We are looking for an element $x' \in S$ such that $x * x' = 0$ (the identity we found in previous proof).
+    \begin{align*}
+        x + x' + xx' &= 0 \\
+        x + x'(1+x) &= 0 \\
+        x'(1+x) &= -x
+    \end{align*}
+    Since $x \in S$, we know $x \neq -1$, so $1+x \neq 0$. Thus we can divide by $1+x$:
+    \begin{equation*}
+        x' = -\frac{x}{1+x}
+    \end{equation*}
+    We must verify that $x' \in S$, namely, $x'\neq -1$. Assume for the sake of contradiction that $x' = -1$.
+    \begin{align*}
+        -1 &= -\frac{x}{1+x} \\
+        1+x &= x \\
+        1 &= 0
+    \end{align*}
+    This is a contradiction. Therefore, $x' \neq -1$, so $x' \in S$. Every element has an inverse correspond to it.
+\end{proof}
+
+
+
+We seek the solution $x \in S$ for the equation $2*x*3=7$.
+Since we proved in Part 2 that $< S, * >$ is a group, Theorem 4.16  guarantees that linear equations of the form $a*y=b$ and $y*a=b$ have unique solutions in $G$. By applying this theorem twice, we know a unique solution $x$ exists.
+
+We solve for $x$ by evaluating the LHS using the definition of the binary operation $a*b = a+b+ab$:
+
+First, we evaluate the $2*x$
+\[ 2*x = 2 + x + 2(x) = 2 + 3x  \]
+
+Next, we evaluate $(2*x)*3$ by substituting $(2+3x)$ for the first term
+\begin{align*}
+    (2*x)*3 &= (2+3x)*3 \\
+    &= (2+3x) + 3 + (2+3x)(3) \quad (\text{Definition of } *) \\
+    &= 2 + 3x + 3 + 6 + 9x \\
+    &= 12x + 11
+\end{align*}
+
+We equate this result to the right-hand side given in the problem
+\begin{align*}
+    12x + 11 &= 7 \\
+    12x &= -4 \\
+    x &= -\frac{4}{12} = -\frac{1}{3}
+\end{align*}
+
+Finally, we verify that this solution lies in $S$. The set is defined as $S = \mathbb{R} \setminus \{-1\}$. Since $-\frac{1}{3} \neq -1$, we have $-\frac{1}{3} \in S$.
+
+Thus, the unique solution is $x = -\frac{1}{3}$.
+
+
+
+
+\end{solution}
+
+
+\question[] 
+
+
+
+\begin{solution}
+
+\end{solution}
+
+\question[] 
+
+\begin{solution}
+
+\end{solution}
+
+\section{Appendix}
+
+\end{questions}
+
+\end{document}

@@ -50,7 +50,19 @@
 
 \begin{solution}
  {General Idea:}
-To construct the Cayley table for $G=\{1,3,5,7\}$ under multiplication modulo 8, we compute $a \cdot b \pmod 8$ for all pairs. We anticipate that 1 will be the identity element. Since multiplication of integers is commutative, we expect the table to be symmetric across the main diagonal. We will explicitly check that every row and column contains each element exactly once (the Latin Square property), which is characteristic of group tables.
+To construct the Cayley table for $G=\{1,3,5,7\}$ under multiplication modulo 8, we compute $a \cdot b \pmod 8$ for all pairs. We anticipate that 1 will be the identity element. Since multiplication of integers is commutative, we expect the table to be symmetric across the main diagonal. We will explicitly check that every row and column contains each element exactly once, which is characteristic of group tables.
+
+\begin{center}
+\begin{tabular}{c|cccc}
+$\cdot_8$ & 1 & 3 & 5 & 7 \\
+\hline
+1 & 1 & 3 & 5 & 7 \\
+3 & 3 & 1 & 7 & 5 \\
+5 & 5 & 7 & 1 & 3 \\
+7 & 7 & 5 & 3 & 1 \\
+\end{tabular}
+\end{center}
+
 \end{solution}
 
 

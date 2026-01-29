@@ -3,6 +3,7 @@
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage{amsthm}
+\usepackage{mathrsfs}
 
 % Number equations by question (nice for homework)
 \numberwithin{equation}{question}
@@ -48,7 +49,7 @@
 \question[] 4.8 The set $\{1,3,5,7\}$ under $\cdot_8$ modulo 8 is a group. Give the table of the group
 
 \begin{solution}
-\paragraph{General Idea:}
+ {General Idea:}
 To construct the Cayley table for $G=\{1,3,5,7\}$ under multiplication modulo 8, we compute $a \cdot b \pmod 8$ for all pairs. We anticipate that 1 will be the identity element. Since multiplication of integers is commutative, we expect the table to be symmetric across the main diagonal. We will explicitly check that every row and column contains each element exactly once (the Latin Square property), which is characteristic of group tables.
 \end{solution}
 
@@ -56,10 +57,11 @@ To construct the Cayley table for $G=\{1,3,5,7\}$ under multiplication modulo 8,
 
 \question[] All $n\times n$ diagonal matrices with non-zero diagonal entries form a group under matrix multiplication.
 
-\paragraph{General Idea:}
+\begin{solution}
+ {General Idea:}
 To prove this, we must first rigorously define the set of diagonal matrices $D^*$. A matrix $A$ is diagonal if $A_{ij} = 0$ whenever $i \neq j$. We will use the standard definition of matrix multiplication, $(AB)_{ij} = \sum_{k=1}^n A_{ik} B_{kj}$, to show that the product of two diagonal matrices is still diagonal (Closure). This summation definition also allows us to derive the specific values of the diagonal entries, which will simplify finding the Identity and Inverse elements.
 
-\begin{solution}
+
     Let $D^*$ be the set of all $n \times n$ diagonal matrices with non-zero entries on the main diagonal. Formally, $A \in D^*$ if:
     \begin{itemize}
         \item $A_{ij} = 0$ for all $i \neq j$.
@@ -69,11 +71,11 @@ To prove this, we must first rigorously define the set of diagonal matrices $D^*
     We first verify if matrix multiplication is binary operation under diagonal matrices(except for the zero matrix)
 
 
-    \paragraph{1. Closure}
+     {1. Closure}
     Let $A, B \in D^*$. By the definition of matrix multiplication, the $(i,j)$-th entry of the product $C = AB$ is
     \[ C_{ij} = \sum_{k=1}^n A_{ik} B_{kj} \]
     
-    Since $A$ is diagonal, $A_{ik} = 0$ unless $k=i$. Thus, the summation over $k$ collapses to a single term where $k=i$:
+    Since $A$ is diagonal, $A_{ik} = 0$ unless $k=i$. Thus, the summation over $k$ only sum to a single term where $k=i$:
     \[ C_{ij} = A_{ii} B_{ij} \]
     
     Now consider the term $B_{ij}$. Since $B$ is diagonal, $B_{ij} = 0$ unless $j=i$.
@@ -85,10 +87,10 @@ To prove this, we must first rigorously define the set of diagonal matrices $D^*
 
 We verify the group axioms for $\langle D^*, \cdot \rangle$
 
-    \paragraph{2. Associativity}
-    Matrix multiplication is associative for all $n \times n$ matrices (a standard result of linear algebra). Since $D^* \subset M_{n \times n}(\mathbb{R})$, the operation inherits associativity.
+     {2. Associativity}
+    Matrix multiplication is associative for all $n \times n$ matrices (by MAT215). Since $D^* \subset M_{n \times n}(\mathbb{R})$, the induced operation keeps associativity.
 
-    \paragraph{3. Identity}
+     {3. Identity}
     Consider the identity matrix $I_n$ where $(I_n)_{ij} = \delta_{ij}$ (the Kronecker delta).
     For any $A \in D^*$, the $(i,j)$-th entry of $A I_n$ is:
     \[ (A I_n)_{ij} = \sum_{k=1}^n A_{ik} \delta_{kj} \]
@@ -96,7 +98,7 @@ We verify the group axioms for $\langle D^*, \cdot \rangle$
     Similarly, $(I_n A)_{ij} = A_{ij}$.
     Since $A_{ii} \neq 0$ implies the diagonal entries of $I_n$ (all 1s) are non-zero, $I_n \in D^*$. Thus, $I_n$ is the identity.
 
-    \paragraph{4. Inverse}
+     {4. Inverse}
     Let $A \in D^*$. We seek a matrix $B \in D^*$ such that $(AB)_{ij} = \delta_{ij}$.
     Using our derived formula for the diagonal product from the Closure section, we know $(AB)_{ii} = A_{ii} B_{ii}$.
     We require:
@@ -104,7 +106,7 @@ We verify the group axioms for $\langle D^*, \cdot \rangle$
     Since $A_{ii} \neq 0$, the value $1/A_{ii}$ is defined and non-zero. Let $B$ be the diagonal matrix with diagonal entries $B_{ii} = 1/A_{ii}$.
     Then:
     \[ (AB)_{ij} = \begin{cases} 0 & i \neq j \\ A_{ii}(1/A_{ii}) = 1 & i = j \end{cases} \]
-    This gives the identity matrix $I_n$. [cite_start]By \textbf{Theorem 4.17}[cite: 38], inverses in a group are unique, so $B = A^{-1}$.
+    This gives the identity matrix $I_n$. By Theorem 4.17, inverses in a group are unique, so $B = A^{-1}$.
 
     Therefore, $D^*$ is a group.
 \end{solution}
@@ -121,15 +123,55 @@ We verify the group axioms for $\langle D^*, \cdot \rangle$
     \item Find the solution of the equation $2*x*3=7$ in $S$
 \end{enumerate}
 \begin{solution}
-\paragraph{General Idea:}
-The operation $a*b = a+b+ab$ can be factored as $(a+1)(b+1) - 1$. This insight reveals that the operation $*$ on the set $S = \mathbb{R} \setminus \{-1\}$ is isomorphic to standard multiplication on $\mathbb{R} \setminus \{0\}$ via the shift map $x \mapsto x+1$.
-\begin{itemize}
-    \item \textbf{Closure \& Inverse:} The condition $x \neq -1$ is equivalent to $x+1 \neq 0$. Since the product of non-zero numbers is non-zero, closure and inverses follow naturally from this shifted perspective.
-    \item \textbf{Equation Solving:} For the equation $2*x*3=7$, we rely on \textbf{Theorem 4.16} (uniqueness of solutions in a group) to guarantee a single valid $x$. We then expand the operation algebraically to isolate $x$.
-\end{itemize}
+ {General Ideas:}
+The operation $a*b = a+b+ab$ can be factored as $(a+1)(b+1) - 1$. This insight reveals that the operation $*$ on the set $S = \mathbb{R} \setminus \{-1\}$ is isomorphic to standard multiplication on $\mathbb{R} \setminus \{0\}$ by the shift 1 unit $x \to x+1$.
+
+Closure \& Inverse: The condition $x \neq -1$ is equivalent to $x+1 \neq 0$. Since the product of non-zero numbers is non-zero, closure and inverses follow naturally from this shifted perspective.
+
+Equation Solving: For the equation $2*x*3=7$, we rely on Theorem 4.16 (uniqueness of solutions in a group) to guarantee a single valid $x$. We then expand the operation algebraically to isolate $x$.
 
 
-First, we show that * gives a binary operation on S. \begin{proof}
+
+First, we show that * gives a binary operation on S. 
+    A Binary Operation * on set $S$ is a function $*:S\times S\to S$, For each $(a,b)\in S\times S$ we denote $*((a,b))$ as $a*b$
+    \begin{proof}
+        Let $(x,y)\in S\times S$ be arbitrary. We wish to show that the mapping $*$ is a function by showing:
+        \begin{itemize}
+            \item The existence of output
+            \item The uniqueness of output under same input
+        \end{itemize}
+
+First we prove the existence condition. That is, there exists an element $x*y$ in $S$.
+
+Since $x,y \in S$, both $x$ and $y$ are real numbers that does not equal $-1$.  
+By definition of $*$, we define
+\[
+x*y := x + y + xy .
+\]
+The expression $x+y+xy$ is a real number because $\mathbb{R}$ is closed under addition and multiplication.  
+Hence, for every $(x,y)\in S\times S$, the value $x*y$ exists as a real number.
+
+Next, we prove the uniqueness condition.  
+Suppose that for the same input $(x,y)\in S\times S$, there exist two outputs $u,v\in S$ such that
+\[
+u = x*y \quad \text{and} \quad v = x*y .
+\]
+By substitution using the definition of $*$, we have
+\[
+u = x+y+xy = v .
+\]
+Thus $u=v$, which proves that the output corresponding to $(x,y)$ is unique.
+
+Therefore, the operation $*$ defines a function from $S\times S$ to $\mathbb{R}$.
+    \end{proof}
+
+
+
+
+
+
+Now we show that $*$ gives a closed binary operation on $S$
+\begin{proof}
     Let $x,y\in S$ be arbitrary. Since $S = \mathbb{R} \setminus \{-1\}$, we know $x \neq -1$ and $y \neq -1$.
     This implies $x+1 \neq 0$ and $y+1 \neq 0$.
     Since the product of two non-zero real numbers is non-zero:
@@ -233,17 +275,99 @@ Thus, the unique solution is $x = -\frac{1}{3}$.
 \end{solution}
 
 
-\question[] 
-
-
-
+\question[] 24. Give a table for a binary operation on the set $\{e, a, b\}$ of three elements satisfying axioms $\mathscr{G}_2$ and $\mathscr{G}_3$ for a group but not axiom $\mathscr{G}_1$.
 \begin{solution}
 
+    Let $S = \{e, a, b\}$. We define the binary operation $*$ on $S$ by the following table:
+
+    \begin{center}
+    \begin{tabular}{c|ccc}
+         $*$ & $e$ & $a$ & $b$ \\
+         \hline
+         $e$ & $e$ & $a$ & $b$ \\
+         $a$ & $a$ & $e$ & $b$ \\
+         $b$ & $b$ & $a$ & $e$
+    \end{tabular}
+    \end{center}
+
+    We now verify the axioms:
+
+     {1.  $\mathscr{G}_2$ (Identity)}\\
+    Observing the first row and first column of the table, we see that for all $x \in S$:
+    \[ e*x = x \quad \text{and} \quad x*e = x \]
+    Thus, $e$ is the identity element.
+
+     {2.  $\mathscr{G}_3$ (Inverses)}\\
+    We check the diagonal entries to find the inverse for each element:
+    \begin{itemize}
+        \item $e*e = e \implies e^{-1} = e$
+        \item $a*a = e \implies a^{-1} = a$
+        \item $b*b = e \implies b^{-1} = b$
+    \end{itemize}
+    Since every element in $S$ has an inverse in $S$, axiom $\mathscr{G}_3$ is satisfied.
+
+     {3. $\mathscr{G}_1$ (Associativity) does not hold}\\
+    To show the operation is not associative, we provide a specific counterexample using elements $a$ and $b$.
+    
+    Consider the expression $(a*b)*a$:
+    \begin{align*}
+        (a*b)*a &= (b)*a \quad (\text{From table, } a*b=b) \\
+        &= a \quad \quad \quad \ (\text{From table, } b*a=a)
+    \end{align*}
+    
+    Now consider the expression $a*(b*a)$:
+    \begin{align*}
+        a*(b*a) &= a*(a) \quad (\text{From table, } b*a=a) \\
+        &= e \quad \quad \quad \ (\text{From table, } a*a=e)
+    \end{align*}
+    
+    Since $(a*b)*a = a$ and $a*(b*a) = e$, and $a \neq e$, we have:
+    \[ (a*b)*a \neq a*(b*a) \]
+    Therefore, the operation is not associative.
 \end{solution}
 
-\question[] 
-
+\question[] 32. Show that every group $G$ with identity $e$ and such that $x*x=e$ for all $x \in G$ is abelian. 
 \begin{solution}
+\paragraph{General Idea:}
+
+We are given a group where every element is its own inverse (i.e., $x*x=e$ implies $x = x^{-1}$). We want to prove the group is abelian, meaning $a*b = b*a$ for all $a, b$.
+
+The strategy is to start with the identity element in a specific form, by hint, consider $(a*b)*(a*b)=e$, and then use the group properties (associativity and cancellation) to isolate $a*b$ and $b*a$ on opposite sides of the equation.
+
+
+
+Let $a, b \in G$ be arbitrary elements.
+
+We are given the property that $x*x = e$ for all $x \in G$. Applying this to the element $(a*b) \in G$, we have:
+
+\begin{equation}
+(ab)(a*b) = e \label{eq:self_inverse}
+\end{equation}
+
+We star($*$) both sides of equation (\ref{eq:self_inverse}) by $a$ on the left:
+
+\begin{align*}
+    a * ((a*b)*(a*b)) &= a * e \\
+    a * (a*(b*(a*b))) &= a \quad (\text{By Associativity on } a, (a*b), (a*b) \text{ and Identity property}) \\
+    (a*a) * (b*(a*b)) &= a \quad (\text{By Associativity on } a, a, (b*(a*b))) \\
+    e * (b*(a*b)) &= a \quad (\text{Since } a*a=e \text{ by given hypothesis}) \\
+    b * (a*b) &= a \quad (\text{By Identity property})
+\end{align*}
+
+
+
+Now, we star this result by $b$ on the left:
+
+\begin{align*}
+    b * (b * (a*b)) &= b * a \\
+    (b*b) * (a*b) &= b * a \quad (\text{By Associativity on } b, b, (a*b)) \\
+    e * (a*b) &= b * a \quad (\text{Since } b*b=e \text{ by given hypothesis}) \\
+    a*b &= b*a \quad (\text{By Identity property})
+\end{align*}
+
+
+
+Since $a*b = b*a$ for all arbitrary $a, b \in G$, the group $G$ is abelian.
 
 \end{solution}
 

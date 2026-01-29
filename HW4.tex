@@ -1,0 +1,215 @@
+\documentclass[12pt,letterpaper, onecolumn]{exam}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+
+% Number equations by question (nice for homework)
+\numberwithin{equation}{question}
+
+% Theorem-like environments, numbered per question
+\newtheorem{theorem}{Theorem}[question]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% Make the QED symbol a solid square (optional)
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\newcommand{\Q}[0]{\mathbb{Q}}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\G}[0]{\mathscr{G}}
+\usepackage{amssymb}
+\usepackage[lmargin=71pt, tmargin=1.2in]{geometry}  %For centering solution box
+\lhead{ }
+\rhead{ }
+% \chead{\hline} % Un-comment to draw line below header
+\thispagestyle{empty}   %For removing header/footer from page 1
+
+\begin{document}
+
+\begingroup  
+    \centering
+    \LARGE Abstract Algebra\\
+    \LARGE Problem Set 4\\[0.5em]
+    \large \today\\[0.5em]
+    \large Xuyi (Sam) Ren\par
+    % \large Roll Number\par
+    \large MAT-321\par
+\endgroup
+\rule{\textwidth}{0.4pt}
+\pointsdroppedatright   %Self-explanatory
+\printanswers
+\renewcommand{\solutiontitle}{\noindent\textbf{Ans:}\enspace}   %Replace "Ans:" with starting keyword in solution box
+\begin{questions}
+
+\question[4.29] Show that if $G$ is a finite group with identity $e$ and with an even number of elements, then there exists an element $a \neq e$ in $G$ such that $a * a = e$.
+\begin{solution}
+\textbf{General Idea:}
+The group $G$ has an even number of elements. Removing the identity element $e$ leaves an odd number of non-identity elements. We define the relationship of an element "pairing" with its inverse. If no element is its own inverse (other than $e$), then the non-identity elements would group perfectly into pairs of size 2. This would imply the number of non-identity elements is even, leading to a contradiction.
+
+    Let $G$ be a group with even order $|G| = 2n$ for some $n \in \mathbb{N}$.
+    Consider the set of non-identity elements $G \setminus \{e\}$.
+    The cardinality of this set is:
+    \[ |G \setminus \{e\}| = |G| - 1 = 2n - 1. \]
+    Since $2n - 1$ is an odd number, $G \setminus \{e\}$ contains an odd number of elements.
+
+    We prove by contradiction. Assume for contradiction that there is no element $a \in G \setminus \{e\}$ such that $a * a = e$.
+    This assumption implies that for all $x \in G \setminus \{e\}$, $x \neq x^{-1}$.
+
+    By Theorem 4.17, every element $x$ has exactly one inverse $x^{-1}$. Since $x \neq e$, we know $x^{-1} \neq e$, so $x^{-1} \in G \setminus \{e\}$.
+    Because we assumed $x \neq x^{-1}$, we can pair every element $x$ in $G \setminus \{e\}$ with its unique and distinct inverse $x^{-1}$ to a subset $\{x, x^{-1}\}$ of size 2.
+    
+    These pairs are disjoint. Thus, $G \setminus \{e\}$ is the union of $k$ distinct pairs for some natural number $k$
+    \[ G \setminus \{e\} = \{x_1, x_1^{-1}\} \cup \{x_2, x_2^{-1}\} \cup \dots \cup \{x_k, x_k^{-1}\} \]
+    This implies that the total number of elements in $G \setminus \{e\}$ is $|G \setminus \{e\}| = 2k$, which is an even number.
+
+    This contradicts our earlier observation that $|G \setminus \{e\}| = 2n - 1$ is an odd number.
+    Therefore, our assumption is false. There must exist at least one element $a \in G \setminus \{e\}$ (so $a \neq e$) such that $a = a^{-1}$.
+    
+    Multiplying($*$) by $a$ on the right, we obtain
+    \[ a * a = e. \]
+\end{solution}
+
+
+
+\question[4.37] Let $G$ be a group and suppose that $a * b * c = e$ for $a, b, c \in G$. Show that $b * c * a = e$ also.
+\begin{solution}
+\textbf{General Idea:}
+We are given that the product $a * b * c$ is the identity. This implies that the inverse of this product, $(a * b * c)^{-1}$, must also be the identity $e$. We use Corollary 4.18 to expand this inverse as $c^{-1} * b^{-1} * a^{-1}$. By manipulating this expanded form, we can show the desired result.
+
+
+    We are given $a * b * c = e$.
+    Taking the inverse of both sides, we have:
+    \[ (a * b * c)^{-1} = e^{-1} = e \]
+    
+    By Corollary 4.18, the inverse of a product is the product of the inverses in reverse order. Thus:
+    \[ (a * b * c)^{-1} = c^{-1} * (a*b)^{-1}=c^{-1} * b^{-1} * a^{-1} \]
+    together, we have
+    \begin{equation}
+        c^{-1} * b^{-1} * a^{-1} = e \label{eq:inverse_identity}
+    \end{equation}
+
+    Now, consider the expression we wish to evaluate: $b * c * a$.
+    We can multiply the equation (\ref{eq:inverse_identity}) by $b * c$ on the left:
+    \begin{align*}
+        (b * c) * (c^{-1} * b^{-1} * a^{-1}) &= (b * c) * e \\
+        b * (c * c^{-1}) * b^{-1} * a^{-1} &= b * c \quad (\text{By Associativity}) \\
+        b * e * b^{-1} * a^{-1} &= b * c \quad (\text{Inverse   } c * c^{-1} = e) \\
+        b * b^{-1} * a^{-1} &= b * c \quad (\text{Identity  }) \\
+        e * a^{-1} &= b * c \quad (\text{Inverse  }) \\
+        a^{-1} &= b * c
+    \end{align*}
+    
+    Finally, we substitute this result ($b * c = a^{-1}$) back into our target expression $b * c * a$:
+    \begin{align*}
+        b * c * a &= (a^{-1}) * a \\
+        &= e \quad (\text{Inverse  })
+    \end{align*}
+    
+    Thus, $b * c * a = e$.
+\end{solution}
+
+
+
+\question[5.8] Determine whether the given set of invertible $n \times n$ matrices with real number entries is a subgroup of $GL(n,\mathbb{R})$: The $n \times n$ matrices with determinant $2$.
+\begin{solution}
+\textbf{General Idea:}
+To determine if a subset is a subgroup, we check the criteria from Theorem 5.14 that closure under the operation, identity, and inverses.
+In this case, we suspect the set is not a subgroup. We can prove it by showing it fails the closure property. Since the determinant of a product is the product of determinants ($\det(AB) = \det(A)\det(B)$) by MAT215, multiplying two matrices with determinant 2 will result in a matrix with determinant 4, which falls outside our set.
+
+
+    Let $H$ be the set of $n \times n$ matrices with determinant 2:
+    \[ H = \{ A \in GL(n, \mathbb{R}) \mid \det(A) = 2 \}. \]
+    We claim that $H$ is not a subgroup of $GL(n, \mathbb{R})$.
+
+    \begin{proof}
+    We show that $H$ fails the closure requirement of Theorem 5.14 (1).
+    Let $A$ and $B$ be arbitrary elements of $H$. By definition, $\det(A) = 2$ and $\det(B) = 2$.
+    
+    Recall from MAT215 the property of determinants for matrix multiplication:
+    \[ \det(AB) = \det(A)\det(B). \]
+    Substituting the values for $A$ and $B$:
+    \[ \det(AB) = 2 \cdot 2 = 4. \]
+    
+    For $AB$ to be in $H$, we would require $\det(AB) = 2$. Since $4 \neq 2$, we have $AB \notin H$.
+    
+    Therefore, $H$ is not closed under matrix multiplication. By Theorem 5.14, $H$ is not a subgroup of $GL(n, \mathbb{R})$.
+    \end{proof}
+\end{solution}
+
+In Exercises 41 and 42, let $\phi : G \to G'$ be an isomorphism of a group
+$(G, *)$ with a group $(G', *')$. Write out a proof to convince a skeptic
+of the intuitively clear statement.
+
+
+
+\question[5.41]  If $H$ is a subgroup of $G$, then
+\[
+\phi[H] = \{\phi(h) \mid h \in H\}
+\]
+is a subgroup of $G'$. That is, an isomorphism carries subgroups into subgroups.
+\begin{solution} 
+\textbf{General idea}
+To prove that a subset is a subgroup, we apply the Theorem 5.14. We must verify three things for the set $\phi[H]$:
+\begin{enumerate}
+    \item Identity\textbf{:} The identity of $G'$ must be in $\phi[H]$.
+    \item Closure\textbf{:} If we take two elements $x, y$ from $\phi[H]$, their product $x *' y$ must also be in $\phi[H]$.
+    \item Inverses\textbf{:} If $x$ is in $\phi[H]$, its inverse $x^{-1}$ must be in $\phi[H]$.
+\end{enumerate}
+
+
+Since $\phi$ is an injective on the entire domain $G$. Restricting the domain to a subset $H$ cannot break injectivity. Thus, $\phi_H$ is injective. By definition, $\phi$ maps $H$ onto its image $\phi[H]$, so it is surjective onto $\phi[H]$. Therefore, $\phi$ induces a bijection between $H$ and $\phi[H]$.
+
+
+    Let $H \le G$. We claim that $\phi[H]$ is a subgroup of $G'$ by verifying the conditions of Theorem 5.14.
+
+    \begin{proof}
+    \textbf{1. Identity:}
+    Since $H$ is a subgroup of $G$, the identity element $e$ of $G$ is in $H$.
+    By the homomorphism property of $\phi$. $\phi(e) = e'$, where $e'$ is the identity of $G'$.
+    Since $e \in H$, we have $\phi(e) \in \phi[H]$. Thus, $e' \in \phi[H]$.
+
+    \textbf{2. Closure:}
+    Let $x, y \in \phi[H]$ be arbitrary.
+    By the definition of the image set $\phi[H]$, there exist $h_1, h_2 \in H$ such that $\phi(h_1) = x$ and $\phi(h_2) = y$.
+    Consider the product $x *' y$:
+    \begin{align*}
+        x *' y &= \phi(h_1) *' \phi(h_2) \\
+        &= \phi(h_1 * h_2) \quad (\text{Since } \phi \text{ is a homomorphism})
+    \end{align*}
+    Since $H$ is a subgroup, it is closed under the operation of $G$. Thus, $h_1 * h_2 \in H$.
+    Consequently, $\phi(h_1 * h_2) \in \phi[H]$, so $x *' y \in \phi[H]$.
+
+    \textbf{3. Inverses:}
+    Let $x \in \phi[H]$. Then $x = \phi(h)$ for some $h \in H$.
+    Since $H$ is a subgroup, $h^{-1} \in H$.
+    Consider the inverse $x^{-1}$:
+    \begin{align*}
+        x^{-1} &= (\phi(h))^{-1} \\
+        &= \phi(h^{-1}) \quad (\text{By Theorem 13.12b})
+    \end{align*}
+    Since $h^{-1} \in H$, it follows that $\phi(h^{-1}) \in \phi[H]$. Thus $x^{-1} \in \phi[H]$.
+
+    Since $\phi[H]$ satisfies all conditions of Theorem 5.14, it is a subgroup of $G'$.
+    \end{proof}
+
+
+
+
+\end{solution}
+
+
+\question[6.22] 
+
+\begin{solution}\end{solution}
+
+\section{Appendix}
+
+\end{questions}
+
+\end{document}

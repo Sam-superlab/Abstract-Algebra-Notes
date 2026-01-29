@@ -595,8 +595,21 @@ H=\{a^n \mid n \in \Z\}
 is a subgroup of $G$ and is the smallest subgroup of $G$ that contains $a$; that is,
 every subgroup containing $a$ contains $H$.
 \end{theorem*}
+
 \begin{proof}
-Sorry
+For the first statement we prove by using lemma 5b. 
+
+Notice that there exits $x'\in\langle x \rangle$ and $x'=x$. Thus $\langle x\rangle\ne \emptyset$. Use Lemma 5b, let $a,b\in \langle x \rangle$ be arbitrary such that we can fix a choice of $m,n\in \Z$ s.t. $a=x^m,b=x^n$, then
+\begin{align*}
+    ab^{-1}&=x^m(x^n)^{-1}\\
+    &=x^mx^{-n}\\
+    &=x^{(m-n)}
+\end{align*}
+By lemma 5A. We know that $m-n\in \Z$ so $ab^{-1}\in \langle x\rangle$ as needed.
+
+The second statement:
+
+Now suppose $H\le G$ and $x\in H$ we wish to show that $\langle x\rangle \le H$. We know $x'=x\in H$, $x^0=e\in H$  and $x^{-1}\in H$. By 5.13, we could prove by induction that both $x^n,x^{-n}\in H$ for arbitrary $n\in \Z$.
 \end{proof}
 
 \sep

@@ -131,7 +131,7 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\G}{\mathscr{G}}
-
+\newcommand{\bij}{\leftrightarrow}
 % ---------- Document ----------
 \begin{document}
 
@@ -621,7 +621,7 @@ n=mq+r \quad \text{and} \quad 0 \le r < m.
 \]
 \end{lemma}
 \begin{proof}
-Sorry
+(TODO)
 \end{proof}
 
 \sep
@@ -630,7 +630,7 @@ Sorry
 \textbf{6.1} Every cyclic group is abelian.
 \end{theorem*}
 \begin{proof}
-Sorry
+(TODO)
 \end{proof}
 
 \sep
@@ -639,7 +639,7 @@ Sorry
 \textbf{6.6} A subgroup of a cyclic group is cyclic.
 \end{theorem*}
 \begin{proof}
-Sorry
+(TODO)
 \end{proof}
 
 \sep
@@ -648,7 +648,7 @@ Sorry
 \textbf{6.7} The subgroups of $(\Z,+)$ are precisely the groups $(n\Z,+)$ for $n \in \N$.
 \end{corollary}
 \begin{proof}
-Sorry
+(TODO)
 \end{proof}
 
 \sep
@@ -659,7 +659,7 @@ If the order of $G$ is infinite, then $G$ is isomorphic to $(\Z,+)$.
 If $G$ has finite order $n$, then $G$ is isomorphic to $(\Z_n,+_n)$.
 \end{theorem*}
 \begin{proof}
-Sorry
+(TODO)
 \end{proof}
 
 \sep
@@ -667,18 +667,11 @@ Sorry
 \begin{lemma}
 \textbf{6.B} Given $r,s,t \in \Z$, if $\gcd(r,s)=1$ and $r$ divides $st$, then $r$ divides $t$.
 \end{lemma}
-\begin{proof}
-Sorry
-\end{proof}
 
-\sep
 
 \begin{lemma}
 \textbf{6.C} For $n,s \in \Z^{+}$, if $g=\gcd(n,s)$, then $\gcd(n/g,s/g)=1$.
 \end{lemma}
-\begin{proof}
-Sorry
-\end{proof}
 
 \sep
 
@@ -688,7 +681,7 @@ $m \in \Z^{+}$ such that $x^{m}=e$.
 For $n \in \Z$, we have $x^{n}=e$ if and only if the order of $G$ divides $n$.
 \end{lemma}
 \begin{proof}
-Sorry
+(TODO)
 \end{proof}
 
 \sep
@@ -697,7 +690,7 @@ Sorry
 \textbf{7.4} The intersection of a family of subgroups $H_i$ of a group $G$ (for $i \in I$) is again a subgroup of $G$.
 \end{theorem*}
 \begin{proof}
-Sorry
+(TODO)
 \end{proof}
 
 \sep
@@ -717,46 +710,54 @@ Sorry
 
 \sep
 
-\begin{lemma}
-\textbf{8.15} Let $G$ and $G'$ be groups and let $\phi : G \to G'$ be a one-to-one function such that
+
+\subsubsection*{8.15, The lemma we use to prove Cayley's Theorem}
+\begin{lemma*}
+
+
+Let $G$ and $G'$ be groups and let $\phi : G \to G'$ be a one-to-one function such that
 \[
 \phi(xy)=\phi(x)\phi(y) \quad \text{for all } x,y \in G.
 \]
 Then $\phi[G]$ is a subgroup of $G'$ and $\phi$ provides an isomorphism of $G$ with $\phi[G]$.
-\end{lemma}
+\end{lemma*}
 \begin{proof}
-Sorry
+We wish to prove by theorem 5.14. First, we prove $\phi[G]$ is closed under $\phi$.
+
+Let $x',y'\in \phi[G]$ be arbitrary, then we can fix a choice of $x,y\in G$ s.t. $\phi(x)=x',\phi(y)=y'$. Apply homomorphism property we have \begin{equation*}
+    \phi(xy)=\phi(x)\phi(y) =x'y' \in \phi[G]
+\end{equation*}
+we haven shown the closure.
+
+Now we show the identity property for subgroup.
+
+let $e'\in G'$ be identity, then we have \proofnote{Here we want the identity of $G'$ in $\phi[G]$, we prove this by using similar idea of proving the identity to be unique, and consider the element $\phi(e)$}
+\begin{equation*}
+    e'\phi(e)=\phi(e)=\phi(ee)=\phi(e)\phi(e)
+\end{equation*}
+applying the cancellation law from left, we have $e'=\phi(e)$.
+
+Now we show the inverse property of subgroup
+
+Let $x'\in \phi[G]$ be arbitrary, we can fix a choice of $x\in G$ s.t. $\phi(x)=x'$. 
+
+consider $e'$ 
+\begin{equation*}
+    e'=\phi(e)=\phi(xx^{-1})=\phi(x)\phi(x^{-1})=x'\phi(x^{-1})
+\end{equation*}
+which shows that $x'^{-1}=\phi(x^{-1})\in \phi[G]$. we have shown that $\phi[G]\le G'$.
+
+Is clear that $\phi:G\bij \phi[G]$ and the homomorphism holds. Thus indeed $\phi$ is isomorphism.
 \end{proof}
 
-\sep
 
-\begin{lemma}
-\textbf{8.B} Let $G$ be a group and $x,y \in G$. Then $\lambda_x \circ \lambda_y=\lambda_{xy}$, and $\lambda_e$ is the identity in $S_G$.
-\end{lemma}
-\begin{proof}
-Sorry
-\end{proof}
-
-\sep
-
-\begin{lemma}
-\textbf{8.C} Let $G$ be a group and $x \in G$. Then the function $\lambda_x : G \to G$ defined by
-\[
-\lambda_x(y)=xy
-\]
-is in $S_G$.
-\end{lemma}
-\begin{proof}
-Sorry
-\end{proof}
-
-\sep
+\subsubsection{8.16, Cayley's Theorem}
 
 \begin{theorem*}
 \textbf{8.16 (Cayley’s Theorem)} Every group is isomorphic to a group of permutations.
 \end{theorem*}
 \begin{proof}
-Sorry
+
 \end{proof}
 
 \sep
@@ -777,376 +778,33 @@ Sorry
 Sorry
 \end{proof}
 
-
-% =======================
-% Continuation (29–41)
-% Theorem/Lemma statements with empty proofs
-% =======================
-
-\sep
-
-\begin{lemma}
-\textbf{9.A} Let $n \in \Z^{+}$, and let $\sigma,\tau \in S_n$ where $\tau$ is a transposition.
-Let $\ell$ and $\ell'$ be the number of orbits in $\sigma$ and $\tau\sigma$, respectively.
-Then $\ell'$ and $\ell$ differ by $1$.
-In particular,
-\[
-\ell' \equiv \ell + 1 \pmod{2}.
-\]
-\end{lemma}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{9.15} Let $n \ge 2$.
-Any permutation $\sigma \in S_n$ can be expressed either as a product of an even number of transpositions
-or as a product of an odd number of transpositions, but not both.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{9.20} If $n \ge 2$, then the collection of all even permutations of $\{1,2,\dots,n\}$
-forms a subgroup of order $n!/2$ of the symmetric group $S_n$.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{10.1} Let $H$ be a subgroup of $G$.
-Define relations $\sim_L$ and $\sim_R$ on $G$ by
-\[
-a \sim_L b \iff a^{-1}b \in H
-\quad \text{and} \quad
-a \sim_R b \iff ab^{-1} \in H.
-\]
-Then $\sim_L$ and $\sim_R$ are equivalence relations on $G$.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{lemma}
-\textbf{10.A} For the equivalence relation $\sim_L$, the equivalence class of an element $g \in G$ is
-\[
-gH := \{gh \mid h \in H\}.
-\]
-For $\sim_R$, the equivalence class of $g$ is
-\[
-Hg := \{hg \mid h \in H\}.
-\]
-\end{lemma}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{lemma}
-\textbf{10.B} Let $H$ be a subgroup of a group $G$, and let $x,y \in G$.
-Then $x \in yH$ if and only if $y \in xH$.
-\end{lemma}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{10.10 (Lagrange)} Let $H$ be a subgroup of a finite group $G$.
-Then
-\[
-|H| \mid |G|.
-\]
-In particular,
-\[
-|H|\,(G:H)=|G|.
-\]
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{corollary}
-\textbf{10.11} Every group of prime order is cyclic.
-\end{corollary}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{10.12} The order of an element of a finite group divides the order of the group.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{11.2} Let $G_1,G_2,\dots,G_n$ be groups.
-For $(a_1,a_2,\dots,a_n)$ and $(b_1,b_2,\dots,b_n)$ in $\prod_{i=1}^n G_i$, define
-\[
-(a_1,a_2,\dots,a_n)(b_1,b_2,\dots,b_n)
-=
-(a_1b_1,a_2b_2,\dots,a_nb_n).
-\]
-Then $\prod_{i=1}^n G_i$ is a group under this binary operation.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{11.5} The group $\Z_m \times \Z_n$ is cyclic and isomorphic to $\Z_{mn}$
-if and only if $m$ and $n$ are relatively prime (that is, $\gcd(m,n)=1$).
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{corollary}
-\textbf{11.6} The group $\prod_{i=1}^n \Z_{m_i}$ is cyclic and isomorphic to $\Z_{m_1m_2\cdots m_n}$
-if and only if $\gcd(m_i,m_j)=1$ for all $i \ne j$.
-\end{corollary}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{11.9} Let $(a_1,a_2,\dots,a_n) \in \prod_{i=1}^n G_i$.
-If $a_i$ has finite order $r_i$ in $G_i$, then the order of $(a_1,a_2,\dots,a_n)$
-in $\prod_{i=1}^n G_i$ is $\mathrm{lcm}(r_1,r_2,\dots,r_n)$.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-% =======================
-% Continuation (42–57)
-% Statements with empty proofs
-% =======================
-
-\sep
-
-\begin{theorem*}
-\textbf{11.12 (Fundamental Theorem of Finitely Generated Abelian Groups)} Every finitely generated abelian group $G$ is isomorphic to a direct product of cyclic groups of the form
-\[
-\Z_{p_1^{r_1}} \times \Z_{p_2^{r_2}} \times \cdots \times \Z_{p_k^{r_k}} \times \Z \times \Z \times \cdots \times \Z,
-\]
-where the $p_i$ are primes (not necessarily distinct) and the $r_i$ are positive integers.
-The direct product is unique up to possible rearrangement of the factors; that is,
-the number of $\Z$ factors is unique and the prime powers $\langle p_i^{r_i}\rangle$ are unique.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{13.12} Let $\phi$ be a homomorphism of a group $G$ into a group $G'$. Then:
-\begin{enumerate}
-    \item If $e$ is the identity element in $G$, then $\phi(e)$ is the identity element in $G'$.
-    \item If $a \in G$, then $\phi(a^{-1})=\phi(a)^{-1}$.
-    \item If $H$ is a subgroup of $G$, then $\phi[H]$ is a subgroup of $G'$.
-    \item If $K'$ is a subgroup of $G'$, then $\phi^{-1}[K']$ is a subgroup of $G$.
-\end{enumerate}
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{13.15} Let $\phi : G \to G'$ be a group homomorphism, and let $H=\ker(\phi)$.
-Let $a \in G$. Then the set
-\[
-\phi^{-1}(\{\phi(a)\})=\{x \in G \mid \phi(x)=\phi(a)\}
-\]
-is the left coset $aH$, and is also the right coset $Ha$ of $H$.
-Consequently, the two partitions of $G$ into left cosets and right cosets are the same.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{corollary}
-\textbf{13.18} A group homomorphism $\phi : G \to G'$ is a one-to-one map if and only if $\ker(\phi)=\{e\}$.
-\end{corollary}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{corollary}
-\textbf{13.20} If $\phi : G \to G'$ is a group homomorphism, then $\ker(\phi)$ is a normal subgroup of $G$.
-\end{corollary}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{14.4} If $H$ is a normal subgroup of a group $G$, then left coset multiplication, given by
-\[
-(aH)(bH)=(ab)H,
-\]
-is a well-defined binary operation on $G/H$.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{corollary}
-\textbf{14.5} If $H$ is a normal subgroup of a group $G$, then $G/H$, with the operation given in Theorem~14.4, is a group.
-\end{corollary}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{14.9} Let $H$ be a normal subgroup of $G$. Then $\gamma : G \to G/H$ defined by
-\[
-\gamma(g)=gH
-\]
-is a homomorphism.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{14.11 (The Fundamental Homomorphism Theorem)} Let $\phi : G \to G'$ be a group homomorphism with kernel $H$.
-Then $\phi[G]$ is isomorphic to $G/H$.
-In particular, if $G'=G/H$ and $\phi(g)=gH$, then $\phi[G]=G/H$.
-If $\gamma : G \to G/H$ is the homomorphism given by $\gamma(g)=gH$, then
-\[
-\phi(g)=\gamma(g)
-\quad \text{for all } g \in G.
-\]
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{14.13} The following are three equivalent conditions for a subgroup $H$ of a group $G$ to be a normal subgroup of $G$:
-\begin{enumerate}
-    \item $ghg^{-1} \in H$ for all $g \in G$ and $h \in H$;
-    \item $gHg^{-1}=H$ for all $g \in G$;
-    \item $gH=Hg$ for all $g \in G$.
-\end{enumerate}
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{lemma}
-\textbf{14.A} If a finite group $G$ has exactly one subgroup $H$ of a given order, then $H$ is a normal subgroup of $G$.
-\end{lemma}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{16.3} Let $X$ be a $G$-set.
-For each $g \in G$, the function $\sigma_g : X \to X$ defined by $\sigma_g(x)=gx$ for $x \in X$
-is a permutation of $X$.
-Also, the map $\phi : G \to S_X$ defined by $\phi(g)=\sigma_g$ is a homomorphism with the property
-that $\phi(g)(x)=gx$.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{16.12} Let $X$ be a $G$-set.
-Then $G_x$ is a subgroup of $G$ for each $x \in X$.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{16.14} Let $X$ be a $G$-set.
-For $x_1,x_2 \in X$, let $x_1 \sim x_2$ if and only if there exists $g \in G$ such that $gx_1=x_2$.
-Then $\sim$ is an equivalence relation on $X$.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{16.16} Let $G$ be a finite group, and let $X$ be a $G$-set.
-Then
-\[
-|X| = (G : G_x).
-\]
-Also, $|G_x|$ is a divisor of $|G|$.
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
-\sep
-
-\begin{theorem*}
-\textbf{36.1} Let $p$ be a prime number.
-If $G$ is a group with order $p^n$ and $X$ is a finite $G$-set, then
-\[
-|X| \equiv |X_G| \pmod{p}.
-\]
-\end{theorem*}
-\begin{proof}
-% TODO
-\end{proof}
-
 \section*{Ring Theory}
 
 
+
+
+\section{Additional Theorems}
+
+\begin{theorem*}
+    \textbf{8.5} $S_A$, the set of all permutations of $A$ forms a group under permutation multiplication.
+\end{theorem*}
+\begin{proof}
+    sorry
+\end{proof}
+
+\begin{theorem*}
+    \textbf{Subgroup of Cyclic group} can be \textbf{unequally} determined by the divisors of $n$
+\end{theorem*}
+
+\begin{proof}
+    sorry
+\end{proof}
+
+\begin{theorem*}
+(\textbf{Abelian condition})    If $H\le G$ and $G$ is abelian, then $gHg^{-1}=H$ for all $g\in G$
+\end{theorem*}
+
+\begin{proof}
+    sorry
+\end{proof}
 \end{document}

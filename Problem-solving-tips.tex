@@ -1,0 +1,162 @@
+\documentclass[11pt]{article}
+
+% ---------- Page Layout ----------
+\usepackage[
+  paper=a4paper,
+  left=0.8in,
+  right=2.2in, % space for notes
+  top=0.8in,
+  bottom=0.8in
+]{geometry}
+
+% ---------- Math Packages ----------
+\usepackage{amsmath, amssymb, amsthm, mathrsfs}
+
+% ---------- Colors ----------
+\usepackage{xcolor}
+\usepackage{pagecolor}
+
+\definecolor{paperCream}{RGB}{253,232,208}
+\pagecolor{paperCream}
+
+% ---------- Marginal Notes ----------
+\setlength{\marginparpush}{10pt}
+\usepackage{marginnote}
+\renewcommand*{\marginfont}{\tiny}
+\setlength{\marginparwidth}{1.7in}
+
+% ---------- Formatting ----------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% ---------- tcolorbox Theorem/Proof Boxes (title bar like screenshot) ----------
+\usepackage[most]{tcolorbox}
+
+% Theme colors (tune these as you like)
+\definecolor{thmBar}{RGB}{120,0,0}        % deep red title bar (like screenshot)
+\definecolor{thmBody}{RGB}{255,248,244}   % very light warm body
+\definecolor{thmFrame}{RGB}{120,0,0}      % frame matches title bar
+
+\definecolor{prfBar}{RGB}{30,80,140}      % proof title bar (blue)
+\definecolor{prfBody}{RGB}{248,249,251}   % proof body background
+\definecolor{prfFrame}{RGB}{30,80,140}
+
+% Base style for "bar-header" boxes
+\tcbset{
+  barbox/.style={
+    enhanced,
+    breakable,
+    sharp corners,
+    boxrule=0.8pt,
+    left=8pt,right=8pt,top=6pt,bottom=6pt,
+    before skip=10pt,
+    after skip=10pt,
+    coltitle=white,
+    fonttitle=\bfseries,
+    attach boxed title to top left={yshift=-1.6mm, xshift=3mm},
+    boxed title style={
+      sharp corners,
+      boxrule=0pt,
+      top=2pt,bottom=2pt,left=7pt,right=7pt
+    },
+  }
+}
+
+% Theorem-like environments (numbered within section)
+\newtcbtheorem[number within=section]{theorem}{Theorem}{
+  barbox,
+  colback=thmBody,
+  colframe=thmFrame,
+  colbacktitle=thmBar,
+  boxed title style={colback=thmBar}
+}{thm}
+
+\newtcbtheorem[use counter from=theorem]{lemma}{Lemma}{
+  barbox,
+  colback=thmBody,
+  colframe=thmFrame,
+  colbacktitle=thmBar,
+  boxed title style={colback=thmBar}
+}{lem}
+
+\newtcbtheorem[use counter from=theorem]{proposition}{Proposition}{
+  barbox,
+  colback=thmBody,
+  colframe=thmFrame,
+  colbacktitle=thmBar,
+  boxed title style={colback=thmBar}
+}{prop}
+
+\newtcbtheorem[use counter from=theorem]{corollary}{Corollary}{
+  barbox,
+  colback=thmBody,
+  colframe=thmFrame,
+  colbacktitle=thmBar,
+  boxed title style={colback=thmBar}
+}{cor}
+
+% Proof box: wrap the amsthm proof environment (syntax unchanged)
+\newtcolorbox{proofbox}{
+  barbox,
+  colback=prfBody,
+  colframe=prfFrame,
+  colbacktitle=prfBar,
+  boxed title style={colback=prfBar},
+  title=Proof
+}
+
+\let\oldproof\proof
+\let\endoldproof\endproof
+\renewenvironment{proof}{
+  \begin{proofbox}\begin{oldproof}
+}{
+  \end{oldproof}\end{proofbox}
+}
+
+% ---------- Custom Note Command ----------
+\renewcommand{\thmnote}[1]{\marginnote{\emph{#1}}}
+\newcommand{\proofnote}[1]{\marginnote{\footnotesize\emph{#1}}}
+\newcommand{\reason}[1]{\quad \text{(#1)}}
+
+% ---------- Separators ----------
+\newcommand{\sep}{%
+  \vspace{0.6em}
+  \noindent\rule{\linewidth}{0.4pt}
+  \vspace{0.6em}
+}
+
+% ---------- Common Number Sets ----------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\G}{\mathscr{G}}
+\newcommand{\bij}{\leftrightarrow}
+% ---------- Document ----------
+\begin{document}
+
+
+
+\begin{center}
+    {\Large \textbf{Theorem List w/ Proof}}\\
+    \vspace{0.3em}
+    {\small Abstract Algebra \quad • \quad Spring 2026 \quad • \quad Xuyi Ren}
+\end{center}
+
+% ==================================================
+\section{How to Draw a Subgroup Diagram}
+
+
+First, we shall recognize which type of Group we are dealing with:
+\begin{itemize}
+    \item \textbf{Cyclic Group}: Each subgroup correlate with a divisor
+    \item \textbf{Finite Group:} use Lagrange + generators
+    \item \textbf{Non-abelian Group:} classify by element types
+\end{itemize}
+
+
+Then we list all subgroups.
+
+
+
+\end{document}

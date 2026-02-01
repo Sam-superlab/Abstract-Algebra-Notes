@@ -132,6 +132,8 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\G}{\mathscr{G}}
 \newcommand{\bij}{\leftrightarrow}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
 % ---------- Document ----------
 \begin{document}
 
@@ -489,11 +491,20 @@ Similarly, for the other direction:
 Thus $b'\ast a'$ is a two-sided inverse of $a\ast b$, so by Theorem~4.17 it must equal $(a\ast b)'$.
 \end{proof}
 
+\subsubsection{Lemma 5.A}
 
-\sep
+\begin{lemma}
+Let $G$ be a group and $x \in G$. For any $m,n \in \mathbb{Z}$, we have
+\[
+x^{m} * x^{n} = x^{m+n}
+\quad \text{and} \quad
+(x^{m})^{n} = x^{mn}.
+\]
+\end{lemma}
 
 
 
+\subsubsection{Subgroup Criterion}
 \begin{theorem*}
 \textbf{5.14 (Subgroup Criterion)} Let $(G,\ast)$ be a group, and let $H \subseteq G$.
 Then $H$ is a subgroup of $G$ if and only if the following three conditions all hold:\proofnote{
@@ -614,23 +625,32 @@ Now suppose $H\le G$ and $x\in H$ we wish to show that $\langle x\rangle \le H$.
 
 \sep
 
+\subsubsection{6.A (Division Algorithm)}
+
 \begin{lemma}
 \textbf{6.A (Division Algorithm)} If $m \in \Z^{+}$ and $n \in \Z$, then there exist unique integers $q,r$ such that
 \[
 n=mq+r \quad \text{and} \quad 0 \le r < m.
 \]
 \end{lemma}
-\begin{proof}
-(TODO)
-\end{proof}
-
 \sep
+
+\subsubsection{6.1 Every cyclic group is abelian.}
 
 \begin{theorem*}
 \textbf{6.1} Every cyclic group is abelian.
 \end{theorem*}
+
 \begin{proof}
-(TODO)
+Let $a,b\in G$ be arbitrary, where $G=\la x\ra$ is a cyclic group. 
+
+Then there exists some integer $n,m$ s.t. $a=x^n,b=x^m$. We wish to prove $ab=ba$. 
+Consider $ab$ by Lemma 5A we have:
+\begin{equation*}
+    ab=x^nx^m=x^{n+m}=x^{m+n}=x^mx^n=ba
+\end{equation*}
+
+
 \end{proof}
 
 \sep
@@ -639,7 +659,7 @@ n=mq+r \quad \text{and} \quad 0 \le r < m.
 \textbf{6.6} A subgroup of a cyclic group is cyclic.
 \end{theorem*}
 \begin{proof}
-(TODO)
+Consider $H\le G$ be a subgroup of $G=\la x\ra$. We wish to prove $H$ also be cyclic, namely, 
 \end{proof}
 
 \sep
@@ -662,18 +682,6 @@ If $G$ has finite order $n$, then $G$ is isomorphic to $(\Z_n,+_n)$.
 (TODO)
 \end{proof}
 
-\sep
-
-\begin{lemma}
-\textbf{6.B} Given $r,s,t \in \Z$, if $\gcd(r,s)=1$ and $r$ divides $st$, then $r$ divides $t$.
-\end{lemma}
-
-
-\begin{lemma}
-\textbf{6.C} For $n,s \in \Z^{+}$, if $g=\gcd(n,s)$, then $\gcd(n/g,s/g)=1$.
-\end{lemma}
-
-\sep
 
 \begin{lemma}
 \textbf{6.D} If $G$ is a finite cyclic group with generator $x$, then the order of $G$ is the smallest

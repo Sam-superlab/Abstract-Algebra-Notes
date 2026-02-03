@@ -657,9 +657,76 @@ Consider $ab$ by Lemma 5A we have:
 
 \begin{theorem*}
 \textbf{6.6} A subgroup of a cyclic group is cyclic.
-\end{theorem*}
-\begin{proof}
-Consider $H\le G$ be a subgroup of $G=\la x\ra$. We wish to prove $H$ also be cyclic, namely, 
+\end{theorem*}\begin{proof}
+Let $G$ be a cyclic group, and choose a generator $x$, so
+\[
+G = \langle x \rangle = \{x^n \mid n \in \mathbb{Z}\}.
+\]
+\proofnote{Fix a concrete generator to reduce the problem to powers of one element.}
+
+Now, let $H$ be a subgroup of $G$. If $H = \{e\}$, then since $\langle e \rangle = \{e\}$,
+it follows that $H$ is cyclic. Thus, we may assume $H$ contains more than just the identity.
+That is, we can fix an element $g \in H$ with $g \neq e$.
+
+Since $H \le G = \langle x \rangle$, we can fix $k \in \mathbb{Z}$ such that $g = x^k$.
+Since $g \neq e$, we know $k \neq 0$.
+\proofnote{Every element of a cyclic group is a power of the generator.}
+
+Notice that
+\[
+g^{-1} = (x^k)^{-1} = x^{-k}
+\]
+by Lemma 5A. Since $g^{-1} \in H$, and at least one of $k$ or $-k$ is a positive integer,
+we know that some positive power of $x$ is in $H$.
+
+Let $m$ be the smallest positive integer such that $x^m \in H$.
+\proofnote{Minimal positive exponent is the key structural invariant.}
+
+We will prove by double containment that $H = \langle x^m \rangle$.
+By Theorem 5.17, since $x^m \in H$, we have
+\[
+\langle x^m \rangle \subseteq H.
+\]
+
+Now, let $b \in H$ be arbitrary. Since $b \in G = \langle x \rangle$,
+we can fix $n \in \mathbb{Z}$ such that $b = x^n$.
+By Lemma 6A (the Division Algorithm), we can find integers $q, r$ such that
+\[
+n = mq + r \quad \text{and} \quad 0 \le r \le m - 1.
+\]
+
+Then $r = n - mq$, so
+\[
+\begin{aligned}
+x^r
+&= x^{n - mq} && \text{since } n - mq = r \\
+&= x^n x^{-mq} && \text{by Lemma 5A} \\
+&= x^n (x^m)^{-q} && \text{by Lemma 5A} \\
+&= b (x^m)^{-q} && \text{since } b = x^n.
+\end{aligned}
+\]
+
+Since $b \in H$ and $(x^m)^{-q} \in \langle x^m \rangle \subseteq H$,
+we get $b(x^m)^{-q} \in H$ by closure. Hence,
+\[
+x^r \in H.
+\]
+\proofnote{This is the key contradiction step.}
+
+But $m$ was the smallest positive integer such that $x^m \in H$.
+Since $0 \le r < m$, the only way $x^r$ can be in $H$ is if $r = 0$.
+Therefore,
+\[
+b = x^n = x^{mq + 0} = (x^m)^q
+\]
+by substitution and Lemma 5A.
+
+Thus, $b \in \langle x^m \rangle$. Since $b \in H$ was arbitrary, we conclude
+\[
+H \subseteq \langle x^m \rangle.
+\]
+
+Therefore, $H = \langle x^m \rangle$, completing the proof.
 \end{proof}
 
 \sep
@@ -679,9 +746,75 @@ If the order of $G$ is infinite, then $G$ is isomorphic to $(\Z,+)$.
 If $G$ has finite order $n$, then $G$ is isomorphic to $(\Z_n,+_n)$.
 \end{theorem*}
 \begin{proof}
-(TODO)
+We wish to prove that $G \cong (\mathbb{Z}, +)$, where $G$ is an infinite cyclic group.
+
+Since $G$ is cyclic, we can fix an element $x \in G$ such that
+\[
+G = \langle x \rangle = \{x^n \mid n \in \mathbb{Z}\}.
+\]
+
+Assume that $G$ is infinite. Define a map $\phi : \mathbb{Z} \to G$ by
+\[
+\phi(i) = x^i \quad \text{for all } i \in \mathbb{Z}.
+\]
+We will show that $\phi$ is an isomorphism.
+
+\medskip
+\noindent
+\textbf{Homomorphism.}
+Let $i, j \in \mathbb{Z}$ be arbitrary. Then
+\[
+\phi(i + j) = x^{i+j} = x^i x^j = \phi(i)\phi(j),
+\]
+where the equality $x^{i+j} = x^i x^j$ follows from Lemma~5A. Hence, $\phi$ is a homomorphism.
+
+\medskip
+\noindent
+\textbf{Surjectivity.}
+Let $g \in G$ be arbitrary. Since $G = \langle x \rangle$, there exists $n \in \mathbb{Z}$ such that
+\[
+g = x^n = \phi(n).
+\]
+Thus, $\phi$ is surjective.
+
+\medskip
+\noindent
+\textbf{Injectivity.}
+Assume for contradiction that $\phi(i) = \phi(j)$ for some $i, j \in \mathbb{Z}$ s.t. $i\ne j$. Then
+\[
+x^i = x^j.
+\]
+Without loss of generality, assume $i > j$ and let $m = i - j$. Then
+\[
+x^m = x^{i-j} = x^i x^{-j} = e.
+\]
+
+We now show that this leads to a contradiction. Since $x^m = e$, every element of $G$ can be written as one of
+\[
+\{e, x, x^2, \dots, x^{m-1}\}.
+\]
+Indeed, let $g \in G$ be arbitrary. Then $g = x^n$ for some $n \in \mathbb{Z}$. By the Division Algorithm, there exist integers $q, r$ such that
+\[
+n = mq + r \quad \text{with } 0 \le r \le m-1.
+\]
+Thus,
+\[
+x^n = x^{mq+r} = (x^m)^q x^r = e^q x^r = x^r.
+\]
+Hence, $G$ is finite, contradicting the assumption that $G$ is infinite.
+
+Therefore, $m = 0$, which implies $i = j$. Hence, $\phi$ is injective.
+
+\medskip
+Since $\phi$ is a bijective homomorphism, it is an isomorphism. Therefore,
+\[
+G \cong (\mathbb{Z}, +).
+\]
 \end{proof}
 
+
+
+\textbf{Week 2 Quiz}
 
 \begin{lemma}
 \textbf{6.D} If $G$ is a finite cyclic group with generator $x$, then the order of $G$ is the smallest

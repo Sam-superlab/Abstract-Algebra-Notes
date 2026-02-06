@@ -221,6 +221,37 @@ Let $G$ be a group and let $a_i\in G$ for $i\in I$. The smallest subgroup of $G$
     Let $f: A\to B$ be a function and let $H\subseteq A$.  Then the \textbf{image of $H$ under $f$ } is $\{f(h)|h\in H\}$ and denoted by $f[H]$.
 \end{definition}
 
+\subsection{Orbits, Cycles, and the Alternating Groups}
+
+\subsubsection{Orbits}
+
+\begin{definition}[\textbf{Orbits}]
+Let $\sigma:A\bij A$, then the equivalence class $[a] := \{\, b \in A \mid \exists n \in \mathbb{Z},\ \sigma^n(a)=b \,\}
+$ are the orbits of $\sigma$. $Orb_\sigma(a)=[a]$. 
+    
+\end{definition}
+
+\begin{definition}[\textbf{Cycle, Length of cycle}]
+
+A permutation $\sigma\in S_n$ is a cycle if it has at most one orbit containing more than one element. The \textbf{length} of a cycle is the number of elements in its largest orbit
+    
+\end{definition}
+
+\begin{definition}[\textbf{Disjoint}]
+    A cycle is \textbf{disjoint} if any integer is moved by at most one of these cycles
+\end{definition}
+\subsubsection{Even, Odd permutations}
+\begin{definition}[\textbf{Transposition}]
+    A cycle of length 2 is a \textbf{transposition}
+\end{definition}
+
+\begin{definition}[Even, Odd permutation]
+    A permutation of a finite set is \textbf{even} or \textbf{odd} according to whether it can be expressed as a product of an even number of  transpositions or the product of an odd number of transpositions, respectively
+\end{definition}
+
+\begin{definition}[\textbf{Alternating Group}]
+The subgroup of $S_n$ consisting of the even permutations of $n$ letters is the \textbf{alternating group $A_n$ on $n$ letters.}
+\end{definition}
 
 
 \end{multicols}
